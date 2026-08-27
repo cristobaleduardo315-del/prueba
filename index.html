@@ -2133,19 +2133,19 @@ footer { background: var(--ocean); color: var(--cream); }
             <div class="ipad-screen">
               <div class="ipad-slider" id="ipadSlider">
                 <div class="ipad-slide">
-                  <img src="https://www.yachtmastershub.com/assets/tablet-dashboard.png" alt="Dashboard & Vessel Overview" />
+                  <img src="https://www.yachtmastershub.com/assets/tablet-dashboard.png" alt="Dashboard & Vessel Overview"[cite: 1] />
                 </div>
                 <div class="ipad-slide">
-                  <img src="https://www.yachtmastershub.com/assets/tablet-maintenance.png" alt="Maintenance & Projects" />
+                  <img src="https://www.yachtmastershub.com/assets/tablet-maintenance.png" alt="Maintenance & Projects"[cite: 1] />
                 </div>
                 <div class="ipad-slide">
-                  <img src="https://www.yachtmastershub.com/assets/tablet-equipment.png" alt="Equipment Management" />
+                  <img src="https://www.yachtmastershub.com/assets/tablet-equipment.png" alt="Equipment Management"[cite: 1] />
                 </div>
                 <div class="ipad-slide">
-                  <img src="https://www.yachtmastershub.com/assets/tablet-profile.png" alt="Vessel Profile & Documentation" />
+                  <img src="https://www.yachtmastershub.com/assets/tablet-profile.png" alt="Vessel Profile & Documentation"[cite: 1] />
                 </div>
                 <div class="ipad-slide">
-                  <img src="https://www.yachtmastershub.com/assets/tablet-ai.png" alt="AI Assistant" />
+                  <img src="https://www.yachtmastershub.com/assets/tablet-ai.png" alt="AI Assistant"[cite: 1] />
                 </div>
               </div>
               <div class="ipad-home-bar"></div>
@@ -2157,31 +2157,31 @@ footer { background: var(--ocean); color: var(--cream); }
             <div class="acc-item open" data-index="0">
               <button class="acc-btn">Dashboard &amp; Vessel Overview <span class="pm">+</span></button>
               <div class="acc-panel">
-                <p>See the complete health of your vessel at a glance. Monitor maintenance status, upcoming tasks, equipment health, project activity, and operational alerts from one centralized dashboard.</p>
+                <p>See the complete health of your vessel at a glance. Monitor maintenance status, upcoming tasks, equipment health, project activity, and operational alerts from one centralized dashboard.[cite: 1]</p>
               </div>
             </div>
             <div class="acc-item" data-index="1">
               <button class="acc-btn">Maintenance &amp; Projects <span class="pm">+</span></button>
               <div class="acc-panel">
-                <p>Plan, schedule, and track every maintenance task and refit project with a clear operational timeline.</p>
+                <p>Plan, schedule, and track every maintenance task and refit project with a clear operational timeline.[cite: 1]</p>
               </div>
             </div>
             <div class="acc-item" data-index="2">
               <button class="acc-btn">Equipment Management <span class="pm">+</span></button>
               <div class="acc-panel">
-                <p>Keep a live inventory of every system aboard, with warranties, service history, and documentation in one place.</p>
+                <p>Keep a live inventory of every system aboard, with warranties, service history, and documentation in one place.[cite: 1]</p>
               </div>
             </div>
             <div class="acc-item" data-index="3">
               <button class="acc-btn">Vessel Profile &amp; Documentation <span class="pm">+</span></button>
               <div class="acc-panel">
-                <p>Store specifications, certificates, and manuals so the full picture of your vessel is always at hand.</p>
+                <p>Store specifications, certificates, and manuals so the full picture of your vessel is always at hand.[cite: 1]</p>
               </div>
             </div>
             <div class="acc-item" data-index="4">
               <button class="acc-btn">AI Assistant <span class="pm">+</span></button>
               <div class="acc-panel">
-                <p>Ask VesselIQ anything about your vessel and get grounded, source-backed answers in seconds.</p>
+                <p>Ask VesselIQ anything about your vessel and get grounded, source-backed answers in seconds.[cite: 1]</p>
               </div>
             </div>
           </div>
@@ -2204,124 +2204,6 @@ footer { background: var(--ocean); color: var(--cream); }
         </div>
       </div>
     </section>
-
-  </div>
-</div>
-
-<script>
-  (function () {
-    "use strict";
-
-    function initYMH() {
-      var video = document.getElementById("heroVideo");
-      var startTrialBtn = document.getElementById("startTrialBtn");
-      var captainsCta = document.getElementById("captainsCta");
-      var nav = document.getElementById("mainNav");
-      var navToggle = document.getElementById("navToggle");
-      var centerLogo = document.getElementById("heroCenterLogo");
-      var heroSubtitle = document.getElementById("heroSubtitle");
-      var heroInteractiveFlow = document.getElementById("heroInteractiveFlow");
-      var heroAskInput = document.getElementById("heroAskInput");
-      var pageContent = document.getElementById("pageContent");
-
-      if (video) {
-        video.muted = true;
-        var playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(function () {});
-        }
-      }
-
-      if (navToggle && nav) {
-        navToggle.addEventListener("click", function () {
-          var open = nav.classList.toggle("open");
-          navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-      }
-
-      document.querySelectorAll(".hero-starter").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          if (!heroAskInput) return;
-          heroAskInput.value = btn.getAttribute("data-q") || "";
-          heroAskInput.focus();
-        });
-      });
-
-      function handleNavbarScroll() {
-        var scrollY = window.scrollY || window.pageYOffset;
-        var progress = Math.min(scrollY / 150, 1);
-        document.documentElement.style.setProperty('--nav-opacity', (progress * 0.98).toFixed(3));
-        document.documentElement.style.setProperty('--nav-blur', (progress * 14).toFixed(1) + 'px');
-      }
-
-      window.addEventListener("scroll", handleNavbarScroll, { passive: true });
-      handleNavbarScroll();
-
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      function revealContent() {
-        if (centerLogo) centerLogo.classList.add("is-hidden");
-        if (nav) nav.classList.add("is-visible");
-        if (startTrialBtn) startTrialBtn.classList.add("is-hidden");
-        if (heroSubtitle) heroSubtitle.classList.add("is-visible");
-        if (heroInteractiveFlow) heroInteractiveFlow.classList.add("is-visible");
-
-        setTimeout(function () {
-          if (heroAskInput) heroAskInput.focus();
-        }, 300);
-
-        if (pageContent) {
-          pageContent.classList.add("is-visible");
-          var reveals = document.querySelectorAll("[data-reveal]");
-          reveals.forEach(function (el) {
-            observer.observe(el);
-            el.classList.add("in");
-          });
-        }
-      }
-
-      if (startTrialBtn) {
-        startTrialBtn.addEventListener("click", revealContent);
-      }
-
-      if (captainsCta) {
-        captainsCta.addEventListener("click", function () {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          if (heroAskInput) setTimeout(function () { heroAskInput.focus(); }, 400);
-        });
-      }
-
-      var accItems = document.querySelectorAll("#acc .acc-item");
-      var ipadSlider = document.getElementById("ipadSlider");
-
-      accItems.forEach(function (item) {
-        var btn = item.querySelector(".acc-btn");
-        if (!btn) return;
-        btn.addEventListener("click", function () {
-          accItems.forEach(function (i) { i.classList.remove("open"); });
-          item.classList.add("open");
-
-          var index = parseInt(item.getAttribute("data-index"), 10);
-          if (!isNaN(index) && ipadSlider) {
-            ipadSlider.style.transform = "translateY(-" + (index * 100) + "%)";
-          }
-        });
-      });
-    }
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initYMH);
-    } else {
-      initYMH();
-    }
-  })();
-</script>
 
 
 <div class="ymh-wrapper">
@@ -2419,7 +2301,7 @@ footer { background: var(--ocean); color: var(--cream); }
 
 <div class="ymh-wrapper">
   <!-- Sección 3: How Yacht Masters Hub Works -->
-  <section class="pad section-how" id="how-2">
+  <section class="pad section-how" id="how">
     <div class="wrap center">
       <h2 class="sec-head reveal" data-reveal>How Yacht Masters Hub Works</h2>
       <p class="lead reveal" data-reveal style="max-width:640px;margin:18px auto 0">From your first login to fully managing your vessel, Yacht Masters Hub is designed to get you operational quickly, no lengthy implementation or complicated setup required.</p>
@@ -2484,7 +2366,7 @@ footer { background: var(--ocean); color: var(--cream); }
 
 <div class="ymh-wrapper">
   <!-- Sección 4: Platform Features -->
-  <section class="band-cream pad" id="platform-features-2">
+  <section class="band-cream pad" id="platform-features">
     <div class="wrap split reveal" data-reveal>
       
       <!-- Interactive iPad View -->
@@ -2492,7 +2374,7 @@ footer { background: var(--ocean); color: var(--cream); }
         <div class="ipad-mockup">
           <div class="ipad-camera"></div>
           <div class="ipad-screen">
-            <div class="ipad-slider" id="ipadSlider-2">
+            <div class="ipad-slider" id="ipadSlider">
               <div class="ipad-slide">
                 <img src="https://www.yachtmastershub.com/assets/tablet-dashboard.png" alt="Dashboard &amp; Vessel Overview">
               </div>
@@ -2516,7 +2398,7 @@ footer { background: var(--ocean); color: var(--cream); }
       
       <!-- Accordion Controls -->
       <div class="txt">
-        <div class="acc-2" id="acc-2">
+        <div class="acc" id="acc">
           <div class="acc-item open" data-index="0">
             <button class="acc-btn">Dashboard &amp; Vessel Overview <span class="pm">+</span></button>
             <div class="acc-panel">
@@ -2575,7 +2457,7 @@ footer { background: var(--ocean); color: var(--cream); }
 
       // Lógica del Acordeón e iPad Slider
       var accItems = document.querySelectorAll("#acc .acc-item");
-      var ipadSlider = document.getElementById("ipadSlider-2");
+      var ipadSlider = document.getElementById("ipadSlider");
 
       accItems.forEach(function (item) {
         var btn = item.querySelector(".acc-btn");
@@ -2607,7 +2489,7 @@ footer { background: var(--ocean); color: var(--cream); }
 
 <div class="ymh-wrapper">
   <!-- Sección 5: VesselIQ Teaser Band -->
-  <section class="viq pad" id="vesseliq-band-2">
+  <section class="viq pad" id="vesseliq-band">
     <div class="bg"></div>
     <div class="wrap">
       <div class="inner reveal" data-reveal>
@@ -2788,5 +2670,123 @@ footer { background: var(--ocean); color: var(--cream); }
 </footer>
 
 
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    function initYMH() {
+      var video = document.getElementById("heroVideo");
+      var startTrialBtn = document.getElementById("startTrialBtn");
+      var captainsCta = document.getElementById("captainsCta");
+      var nav = document.getElementById("mainNav");
+      var navToggle = document.getElementById("navToggle");
+      var centerLogo = document.getElementById("heroCenterLogo");
+      var heroSubtitle = document.getElementById("heroSubtitle");
+      var heroInteractiveFlow = document.getElementById("heroInteractiveFlow");
+      var heroAskInput = document.getElementById("heroAskInput");
+      var pageContent = document.getElementById("pageContent");
+
+      if (video) {
+        video.muted = true;
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function () {});
+        }
+      }
+
+      if (navToggle && nav) {
+        navToggle.addEventListener("click", function () {
+          var open = nav.classList.toggle("open");
+          navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+
+      document.querySelectorAll(".hero-starter").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (!heroAskInput) return;
+          heroAskInput.value = btn.getAttribute("data-q") || "";
+          heroAskInput.focus();
+        });
+      });
+
+      function handleNavbarScroll() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var progress = Math.min(scrollY / 150, 1);
+        document.documentElement.style.setProperty('--nav-opacity', (progress * 0.98).toFixed(3));
+        document.documentElement.style.setProperty('--nav-blur', (progress * 14).toFixed(1) + 'px');
+      }
+
+      window.addEventListener("scroll", handleNavbarScroll, { passive: true });
+      handleNavbarScroll();
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      function revealContent() {
+        if (centerLogo) centerLogo.classList.add("is-hidden");
+        if (nav) nav.classList.add("is-visible");
+        if (startTrialBtn) startTrialBtn.classList.add("is-hidden");
+        if (heroSubtitle) heroSubtitle.classList.add("is-visible");
+        if (heroInteractiveFlow) heroInteractiveFlow.classList.add("is-visible");
+
+        setTimeout(function () {
+          if (heroAskInput) heroAskInput.focus();
+        }, 300);
+
+        if (pageContent) {
+          pageContent.classList.add("is-visible");
+          var reveals = document.querySelectorAll("[data-reveal]");
+          reveals.forEach(function (el) {
+            observer.observe(el);
+            el.classList.add("in");
+          });
+        }
+      }
+
+      if (startTrialBtn) {
+        startTrialBtn.addEventListener("click", revealContent);
+      }
+
+      if (captainsCta) {
+        captainsCta.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (heroAskInput) setTimeout(function () { heroAskInput.focus(); }, 400);
+        });
+      }
+
+      var accItems = document.querySelectorAll("#acc .acc-item");
+      var ipadSlider = document.getElementById("ipadSlider");
+
+      accItems.forEach(function (item) {
+        var btn = item.querySelector(".acc-btn");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          accItems.forEach(function (i) { i.classList.remove("open"); });
+          item.classList.add("open");
+
+          var index = parseInt(item.getAttribute("data-index"), 10);
+          if (!isNaN(index) && ipadSlider) {
+            ipadSlider.style.transform = "translateY(-" + (index * 100) + "%)";
+          }
+        });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initYMH);
+    } else {
+      initYMH();
+    }
+  })();
+</script>
 </body>
 </html>
