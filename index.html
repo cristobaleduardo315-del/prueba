@@ -830,69 +830,6 @@
     color: #55606c; 
   }
 
-  /* Section 5: VesselIQ Teaser Band */
-  .ymh-wrapper .eyebrow { 
-    font-size: 12px; 
-    font-weight: 600; 
-    letter-spacing: 0.2em; 
-    text-transform: uppercase; 
-    color: var(--orange); 
-  }
-
-  .ymh-wrapper .mark { 
-    display: inline-block; 
-  }
-
-  .ymh-wrapper .mark img { 
-    display: block; 
-    height: 34px; 
-    width: auto; 
-    margin: 0 auto; 
-  }
-
-  .ymh-wrapper .viq { 
-    position: relative; 
-    text-align: center; 
-    color: #fff; 
-    overflow: hidden; 
-  }
-
-  .ymh-wrapper .viq .bg { 
-    position: absolute; 
-    inset: 0; 
-    background: url("https://www.yachtmastershub.com/assets/vesseliq-waves.jpg") center/cover no-repeat; 
-  }
-
-  .ymh-wrapper .viq .bg::after { 
-    content: ""; 
-    position: absolute; 
-    inset: 0; 
-    background: rgba(15,19,32,0.6); 
-  }
-
-  .ymh-wrapper .viq .inner { 
-    position: relative; 
-    max-width: 720px; 
-    margin: 0 auto; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-  }
-
-  .ymh-wrapper .viq h2 { 
-    font-size: clamp(28px, 4vw, 44px); 
-    margin: 0 0 18px; 
-    color: #fff; 
-  }
-
-  .ymh-wrapper .viq p { 
-    color: var(--warm); 
-    font-weight: 300; 
-    font-size: 16px; 
-    line-height: 1.65; 
-    margin: 0 0 32px; 
-  }
-
   @media (max-width: 1060px) {
     .ymh-wrapper .steps { 
       overflow-x: auto; 
@@ -931,6 +868,102 @@
     .ymh-wrapper .ipad-screen { 
       border-radius: 18px; 
     } 
+  }
+
+  .ymh-wrapper .eyebrow { 
+    font-size: 12px; 
+    font-weight: 600; 
+    letter-spacing: 0.2em; 
+    text-transform: uppercase; 
+    color: var(--orange); 
+  } 
+  .ymh-wrapper .viq { 
+    position: relative; 
+    text-align: center; 
+    color: #fff; 
+    overflow: hidden; 
+  } 
+  .ymh-wrapper .viq .bg { 
+    position: absolute; 
+    inset: 0; 
+    background: url("https://www.yachtmastershub.com/assets/vesseliq-waves.jpg") center/cover no-repeat; 
+  } 
+  .ymh-wrapper .viq .bg::after { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background: rgba(15, 19, 32, 0.75); 
+  } 
+  .ymh-wrapper .viq .inner { 
+    position: relative; 
+    max-width: 720px; 
+    margin: 0 auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+  } 
+  .ymh-wrapper .mark { 
+    display: inline-block; 
+    margin: 18px 0 26px; 
+  } 
+  .ymh-wrapper .mark img { 
+    width: 345.3px !important; 
+    height: 90.9px !important; 
+    max-width: 100%; 
+    object-fit: contain; 
+    display: block; 
+    margin: 0 auto; 
+  } 
+  .ymh-wrapper .viq h2 { 
+    font-size: clamp(28px, 4vw, 44px); 
+    margin: 0 0 18px; 
+    color: #ffffff; 
+  } 
+  .ymh-wrapper .viq p { 
+    color: var(--warm); 
+    font-weight: 300; 
+    font-size: 16px; 
+    line-height: 1.65; 
+    margin: 0 0 32px; 
+  } 
+  .ymh-wrapper .btn-wrapper { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+  } 
+  .ymh-wrapper .btn-outline { 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+    font-family: var(--serif); 
+    font-size: 18px; 
+    color: #ffffff; 
+    padding: 13px 32px; 
+    border-radius: 31px; 
+    cursor: pointer; 
+    background: transparent !important; 
+    text-decoration: none; 
+    transition: transform .2s ease, box-shadow .25s ease, opacity .2s ease; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+  } 
+  .ymh-wrapper .btn-outline::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    border-radius: 31px; 
+    padding: 2px; 
+    background: var(--fill); 
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
+    -webkit-mask-composite: xor; 
+    mask-composite: exclude; 
+    pointer-events: none; 
+  } 
+  .ymh-wrapper .btn-outline:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 30px rgba(254, 162, 0, 0.25); 
+    color: #ffffff; 
   }
 
 
@@ -1600,21 +1633,27 @@ footer { background: var(--ocean); color: var(--cream); }
       </div>
     </section>
 
-    <!-- Sección 5: VesselIQ Teaser -->
+    <!-- Sección 5: VesselIQ Teaser Band -->
     <section class="viq pad" id="vesseliq-band">
       <div class="bg"></div>
       <div class="wrap">
         <div class="inner reveal" data-reveal>
           <div class="eyebrow">Meet the Tech Behind YMH</div>
-          <div class="mark" style="margin:18px 0 26px">
+
+          <div class="mark">
             <img src="https://www.yachtmastershub.com/assets/vesseliq-logo.svg" alt="VesselIQ" />
           </div>
+
           <h2>Intelligence Behind Every Vessel</h2>
           <p>More than AI, VesselIQ creates a living digital twin of your yacht using trusted data to deliver proactive insights, predictive maintenance, and intelligent decision-making.</p>
-          <a class="btn btn-fill" href="/vesseliq">Explore VesselIQ</a>
+
+          <div class="btn-wrapper">
+            <a class="btn-outline" href="/vesseliq">Explore VesselIQ</a>
+          </div>
         </div>
       </div>
     </section>
+
 
 
   <section class="pricing-section" id="pricing" style="background-color:#f7f9fa">
