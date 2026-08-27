@@ -839,20 +839,18 @@
     }
   }
 
-  @media (max-width: 860px) {
-    .ymh-wrapper .split-captains { 
-      grid-template-columns: 1fr; 
+    @media (max-width: 860px) {
+    .ymh-wrapper .split-captains {
+      grid-template-columns: 1fr;
     }
-    .ymh-wrapper .split-captains .txt-side { 
-      max-width: 100%; 
-      margin-left: 0; 
-      padding: 56px clamp(24px, 6vw, 40px) 40px; 
+    .ymh-wrapper .split-captains .txt-side {
+      padding: clamp(40px, 8vw, 64px) 20px;
+      margin: 0 auto;
+      text-align: center;
+      align-items: center;
     }
-    .ymh-wrapper .split-captains .media-side { 
-      height: 360px; 
-    }
-    .ymh-wrapper .split-captains .media-side img { 
-      object-position: center center; 
+    .ymh-wrapper .split-captains .media-side {
+      min-height: auto;
     }
   }
 
@@ -1524,7 +1522,7 @@ footer { background: var(--ocean); color: var(--cream); }
 
     <!-- Sección 2: Built For Captains, Operators & Owners -->
     <section class="section-light" id="features">
-      <div class="wrap">
+      <div class="wrap" style="padding: 0;">
         <div class="split-captains reveal" data-reveal>
           <div class="txt-side">
             <h2>Built For Captains,<br />Operators &amp; Owners</h2>
