@@ -1320,6 +1320,21 @@ section { position: relative; }
 .btn-grad-outline { color: var(--ocean); border: 2.5px solid transparent; padding: 11px 28px; background: linear-gradient(var(--cream), var(--cream)) padding-box, var(--fill) border-box; }
 .btn-grad-outline:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(222,108,133,0.22); }
 
+  #finalCtaBand .media {
+    align-self: start;
+    margin-top: calc(-1 * clamp(64px, 9vw, 112px));
+    margin-left: calc(-1 * clamp(20px, 5vw, 60px));
+  }
+  #finalCtaBand .media img {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  @media (max-width: 820px) {
+    #finalCtaBand .media {
+      margin-left: calc(-1 * clamp(20px, 5vw, 60px));
+    }
+  }
+
 
 :root {
   --ocean: #171C2F;
@@ -1833,7 +1848,7 @@ footer { background: var(--ocean); color: var(--cream); }
 </div>
 
 
-<section class="band-cream pad">
+<section class="band-cream pad" id="finalCtaBand">
   <div class="wrap split reverse reveal in">
     <div class="media"><img src="https://www.yachtmastershub.com/assets/sunset.jpg" alt="Captain using the app at sunset" /></div>
     <div class="txt">
