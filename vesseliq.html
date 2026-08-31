@@ -53,6 +53,7 @@ img { display: block; }
 .teal {
   background: var(--teal);
   position: relative;
+  z-index: 0;
   overflow: hidden;
   height: 700px;
   display: flex;
@@ -88,6 +89,19 @@ img { display: block; }
   font-size: 15.5px;
   line-height: 1.65;
   margin: 0;
+}
+
+/* Decorative image layered between the teal background and the dark card */
+.teal-waves {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 573px;
+  width: auto;
+  max-width: none;
+  pointer-events: none;
 }
 
 .reveal {
@@ -824,6 +838,7 @@ footer { background: var(--ocean); color: var(--cream); }
 </section>
 
 <section class="teal">
+  <img class="teal-waves" src="https://www.yachtmastershub.com/assets/tech-waves.webp" alt="" aria-hidden="true" />
   <div class="wrap">
     <div class="teal-card reveal in">
       <h2>Built From the Information<br />Your Vessel Generates</h2>
