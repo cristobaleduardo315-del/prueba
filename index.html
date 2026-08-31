@@ -236,23 +236,39 @@
   }
 
   .ymh-wrapper .hero-btn {
+    position: relative;
+    z-index: 0;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(var(--cream), var(--cream)) padding-box, linear-gradient(90deg, #FEA200 0%, #DE6C85 55%, #3345AF 100%) border-box;
-    color: var(--ocean);
+    background: transparent;
+    color: #fff;
     font-family: var(--sans);
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0.03em;
     text-decoration: none;
-    padding: 13.5px 33.5px;
+    padding: 16px 36px;
     border-radius: 999px;
-    border: 2.5px solid transparent;
+    border: none !important;
     outline: none !important;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ymh-wrapper .hero-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 2.5px;
+    background: linear-gradient(90deg, #FEA200 0%, #DE6C85 55%, #3345AF 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
   .ymh-wrapper .hero-btn:hover {
