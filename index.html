@@ -511,6 +511,10 @@
     .ymh-wrapper .valhead { grid-template-columns: 1fr; text-align: center; }
     .ymh-wrapper .valhead p { margin: 0 auto; }
     .ymh-wrapper .val-row { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    /* Odd 5th card left dangling alone in the last row of the 2-col
+       grid -- span it across both columns so it centers instead of
+       sitting under the left column. */
+    .ymh-wrapper .val-row .val:nth-child(5) { grid-column: 1 / -1; }
   }
 
   /* Section 2: Built For Captains, Operators & Owners */
