@@ -307,6 +307,27 @@ img { display: block; }
   transform: none;
 }
 
+/* Mobile: stack the 4 steps as a 2x2 grid instead of a single row */
+@media (max-width: 640px) {
+  .section-how-works {
+    height: auto;
+    padding: 56px 0;
+  }
+  .viq-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .vstep {
+    aspect-ratio: unset;
+    min-height: 190px;
+    padding: 18px 14px;
+  }
+  .vstep h3 {
+    font-size: 24px;
+  }
+}
+
 
 :root {
   --serif: Georgia, "Times New Roman", serif;
@@ -502,6 +523,33 @@ img { display: block; }
   .dcarousel .dcard {
     flex: 0 0 85vw;
     width: 85vw;
+  }
+}
+
+/* Mobile: show the cards distributed in a column within the section's
+   margins instead of a horizontally-scrolling carousel. */
+@media (max-width: 700px) {
+  .section-delivers {
+    height: auto;
+    padding: 56px 0;
+  }
+  .dcarousel {
+    flex-direction: column;
+    overflow-x: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding: 0;
+    margin: 0;
+    gap: 16px;
+  }
+  .dcarousel .dcard {
+    flex: unset;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+  .dtrack {
+    display: none;
   }
 }
 
