@@ -1062,8 +1062,7 @@ footer { background: var(--ocean); color: var(--cream); }
     if (!wrap) return;
     function toggleFloatingAsk() {
       var scrollY = window.scrollY || window.pageYOffset;
-      var heroEnd = window.innerHeight * 0.8;
-      wrap.classList.toggle("is-visible", scrollY > heroEnd);
+      wrap.classList.toggle("is-visible", scrollY > 20);
     }
     window.addEventListener("scroll", toggleFloatingAsk, { passive: true });
     toggleFloatingAsk();
