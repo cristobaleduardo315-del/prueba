@@ -378,6 +378,16 @@ img { display: block; }
   text-shadow: 0 1px 3px rgba(0,0,0,0.75), 0 2px 24px rgba(0,0,0,0.5);
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
 
 :root {
   --ocean: #171C2F;
@@ -840,7 +850,7 @@ footer { background: var(--ocean); color: var(--cream); }
 <section class="teal">
   <img class="teal-waves" src="https://www.yachtmastershub.com/assets/tech-waves.webp" alt="" aria-hidden="true" />
   <div class="wrap">
-    <div class="teal-card reveal in">
+    <div class="teal-card reveal">
       <h2>Built From the Information<br />Your Vessel Generates</h2>
       <p>VesselIQ is the proprietary intelligence engine behind Yacht Masters Hub, transforming your vessel's data into proactive insights, predictive maintenance, and smarter decision-making.</p>
     </div>
@@ -848,7 +858,7 @@ footer { background: var(--ocean); color: var(--cream); }
 </section>
 
 <section class="section-more-ai">
-  <div class="more-ai-layout reveal in">
+  <div class="more-ai-layout reveal">
     <div class="more-ai-media">
       <img src="https://www.yachtmastershub.com/assets/viq-morethanai.png" alt="Vessel data connected into one profile" />
     </div>
@@ -861,8 +871,8 @@ footer { background: var(--ocean); color: var(--cream); }
 
 <section class="section-how-works">
   <div class="how-works-wrap center">
-    <h2 class="mod4-sec-head reveal in" style="color:#fff">How VesselIQ Works</h2>
-    <div class="viq-steps reveal in">
+    <h2 class="mod4-sec-head reveal" style="color:#fff">How VesselIQ Works</h2>
+    <div class="viq-steps reveal">
       <div class="vstep">
         <h3>Collect</h3>
         <p>Automatically gathers trusted information from across your vessel.</p>
@@ -885,15 +895,15 @@ footer { background: var(--ocean); color: var(--cream); }
 
 <section class="hud">
   <div class="bg"></div>
-  <h2>All data connected with<br />the Intelligence Engine</h2>
+  <h2 class="reveal">All data connected with<br />the Intelligence Engine</h2>
 </section>
 
 <section class="section-delivers">
   <div class="mod6-wrap">
     <div class="carousel-rule"></div>
-    <h2 class="mod6-sec-head center reveal in">What VesselIQ Delivers On Board</h2>
+    <h2 class="mod6-sec-head center reveal">What VesselIQ Delivers On Board</h2>
     <div class="dcarousel-wrap">
-      <div class="dcarousel reveal in" id="dcarousel">
+      <div class="dcarousel reveal" id="dcarousel">
         
         <!-- Tarjeta 1: Predictive Maintenance -->
         <div class="dcard">
@@ -991,7 +1001,7 @@ footer { background: var(--ocean); color: var(--cream); }
   <div class="bg-overlay"></div>
   
   <div class="wrap">
-    <div class="inner reveal in">
+    <div class="inner reveal">
       <h2>Smarter Decisions Start with<br>VesselIQ Intelligence.</h2>
       <a class="btn-outline" id="viqPageCta" href="/vesseliq#apply">Join Early Access</a>
     </div>
@@ -1081,6 +1091,27 @@ footer { background: var(--ocean); color: var(--cream); }
     }
     window.addEventListener("scroll", toggleFloatingAsk, { passive: true });
     toggleFloatingAsk();
+  })();
+</script>
+
+
+<script>
+  (function () {
+    var els = document.querySelectorAll(".reveal");
+    if (!els.length) return;
+    if (!("IntersectionObserver" in window)) {
+      els.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+    els.forEach(function (el) { observer.observe(el); });
   })();
 </script>
 

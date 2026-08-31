@@ -1853,8 +1853,8 @@ footer { background: var(--ocean); color: var(--cream); }
       Start with the tools you need today and unlock more powerful capabilities as your operation evolves. Available for owners, captains, operators, and growing fleets.
     </p>
 
-    <div class="pricing-grid">
-      
+    <div class="pricing-grid reveal" data-reveal>
+
       <!-- Starter -->
       <div class="card">
         <h3 class="card-title">Starter</h3>
@@ -1942,7 +1942,7 @@ footer { background: var(--ocean); color: var(--cream); }
 
 
 <section class="band-cream pad" id="finalCtaBand">
-  <div class="wrap split reverse reveal in">
+  <div class="wrap split reverse reveal" data-reveal>
     <div class="media"><img src="https://www.yachtmastershub.com/assets/sunset.jpg" alt="Captain using the app at sunset" /></div>
     <div class="txt">
       <h2>Ready to Simplify<br />Yacht Operations?</h2>
@@ -2069,7 +2069,6 @@ footer { background: var(--ocean); color: var(--cream); }
           var reveals = document.querySelectorAll("[data-reveal]");
           reveals.forEach(function (el) {
             observer.observe(el);
-            el.classList.add("in");
           });
         }
       }
