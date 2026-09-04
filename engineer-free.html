@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Try the Engineer (Free Demo) | Yacht Masters Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; }
+
+.ymh-scope {
+  --ocean: #171C2F;
+  --orange: #FEA200;
+  --cream: #F5F1EB;
+  --sans: "Montserrat", -apple-system, sans-serif;
+  --ymh-bg: #f8fafc;
+  --ymh-sidebar: #0b1420;
+  --ymh-ink: #0b1e33;
+  --ymh-ink-2: #171c2f;
+  --ymh-muted: #6b8099;
+  --ymh-muted-light: #8c9eb8;
+  --ymh-muted-lighter: #bfccde;
+  --ymh-link: #0d426a;
+  --ymh-line: #ebedf0;
+  --ymh-border: #e2e8f0;
+  --ymh-r-card: 12px;
+  --ymh-r-pill: 999px;
+  --ymh-shadow-card: 0 2px 8px 0 rgba(11,20,32,.04);
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  font-family: var(--sans);
+  color: var(--ocean);
+  background: var(--ymh-bg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ymh-scope * { box-sizing: border-box; }
+.ymh-scope a { color: inherit; text-decoration: none; }
+.ymh-scope button { font-family: inherit; }
+
+.ymh-scope button, .ymh-scope .tb-chip-btn, .ymh-scope .tb-cta-orange, .ymh-scope .appshell-nav-item, .ymh-scope .vessel-action-btn, .ymh-scope .vessel-unlock-btn {
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.18s cubic-bezier(0.2, 0, 0, 1), background-color 0.18s ease;
+}
+.ymh-scope button:active, .ymh-scope .tb-chip-btn:active, .ymh-scope .tb-cta-orange:active, .ymh-scope .vessel-action-btn:active, .ymh-scope .vessel-unlock-btn:active {
+  transform: scale(0.97) !important;
+}
+
+.ymh-scope .mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 20, 32, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 90;
+}
+.ymh-scope .mobile-backdrop.active { display: block; }
+
+.ymh-scope .appshell-topbar {
+  flex: 0 0 60px;
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--ymh-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 20;
+}
+.ymh-scope .tb-burger-btn {
+  background: transparent;
+  border: 0;
+  color: var(--ymh-ink);
+  cursor: pointer;
+  padding: 4px;
+  display: grid;
+  place-items: center;
+}
+.ymh-scope .tb-burger-btn:hover { transform: scale(1.08); }
+.ymh-scope .tb-title-container { flex: 1; min-width: 0; padding: 0 12px; }
+.ymh-scope .tb-main-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ymh-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ymh-scope .tb-crumb-desktop, .ymh-scope .tb-actions-desktop { display: none; }
+.ymh-scope .tb-notif-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0;
+  background: #f1f3f6;
+  color: var(--ymh-ink);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.ymh-scope .tb-notif-btn:hover {
+  background: #e6e9ee;
+  transform: scale(1.05);
+}
+
+.ymh-scope .appshell-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px 14px 150px;
+  display: flex;
+  flex-direction: column;
+}
+.ymh-scope .oemd-welcome-h {
+  font-size: 21px;
+  font-weight: 600;
+  color: #0b1728;
+  margin: 0 0 4px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.ymh-scope .oemd-welcome-sub { font-size: 12.5px; color: #68798e; margin-bottom: 14px; }
+.ymh-scope .oemd-ask-label { margin: 16px 0 8px; font-size: 13.5px; font-weight: 500; color: #0b1e33; }
+
+.ymh-scope .oemd-tiles { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.ymh-scope .oemd-tile {
+  display: flex;
+  align-items: stretch;
+  background: #ffffff;
+  border: 1px solid #ebedf2;
+  border-radius: var(--ymh-r-card);
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: var(--ymh-shadow-card);
+  overflow: hidden;
+  min-height: 68px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.ymh-scope .oemd-tile:hover {
+  transform: translateY(-2px) scale(1.008);
+  border-color: rgba(245, 166, 35, 0.45);
+  box-shadow: 0 6px 16px rgba(11, 20, 32, 0.08);
+}
+.ymh-scope .oemd-tile.disabled { opacity: 0.7; }
+.ymh-scope .oemd-tile-stripe { width: 3.5px; flex: 0 0 3.5px; }
+.ymh-scope .stripe-orange { background: #f5a623; }
+.ymh-scope .stripe-blue   { background: #133968; }
+.ymh-scope .stripe-green  { background: #10b981; }
+.ymh-scope .stripe-coral  { background: #ea580c; }
+.ymh-scope .stripe-navy   { background: #133968; }
+.ymh-scope .stripe-gray   { background: #cbd5e1; }
+
+.ymh-scope .oemd-tile-inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  min-width: 0;
+}
+.ymh-scope .oemd-tile-left { display: flex; gap: 12px; align-items: center; min-width: 0; flex: 1; }
+.ymh-scope .oemd-tile-icon-pill {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #fff8ee;
+  display: grid;
+  place-items: center;
+}
+.ymh-scope .oemd-tile-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ymh-scope .oemd-tile-title { font-size: 13px; font-weight: 600; color: #0b1e33; line-height: 1.25; }
+.ymh-scope .oemd-tile-sub { font-size: 11px; color: #6a7c93; line-height: 1.35; }
+.ymh-scope .oemd-tile-cta { flex: 0 0 auto; color: #8c9eb8; font-size: 13px; font-weight: 500; }
+.ymh-scope .oemd-tile:hover .oemd-tile-cta { transform: translateX(3px); color: var(--ymh-ink); }
+
+.ymh-scope .mobile-bottom-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px 14px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, rgba(248, 250, 252, 0.96) 24%, #f8fafc 100%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ymh-scope .oemd-mode-row { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.ymh-scope .oemd-mode-row::-webkit-scrollbar { display: none; }
+.ymh-scope .oemd-mode {
+  flex: 0 0 auto;
+  padding: 5px 12px;
+  border-radius: var(--ymh-r-pill);
+  border: 1px solid rgba(11, 30, 51, 0.08);
+  background: #ffffff;
+  color: #0b1e33;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(11, 20, 32, 0.03);
+}
+.ymh-scope .oemd-mode.active { background: #0b1e33; color: #ffffff; font-weight: 600; }
+.ymh-scope .oemd-mode.vessel { background: #fff1dd; color: #171c2f; }
+
+.ymh-scope .chat-input-wrap {
+  background: #ffffff;
+  border-radius: 36px;
+  padding: 4px 6px 4px 14px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e6e9ee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ymh-scope .chat-input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; font-size: 13px; color: var(--ymh-ink); }
+.ymh-scope .chat-btn-icon { width: 30px; height: 30px; background: transparent; border: 0; color: #6b8099; cursor: pointer; display: grid; place-items: center; }
+.ymh-scope .chat-btn-send {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--orange);
+  color: #0b1728;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.ymh-scope .chat-disclaimer { display: none; font-size: 11px; color: var(--ymh-muted); margin-top: 6px; }
+
+.ymh-scope .appshell-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  height: 100dvh;
+  background: var(--ymh-sidebar);
+  color: #ffffff;
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  box-shadow: 8px 0 24px rgba(0,0,0,0.25);
+}
+.ymh-scope .appshell-sidebar.open { transform: translateX(0); }
+.ymh-scope .appshell-logo { display: flex; gap: 10px; align-items: center; }
+.ymh-scope .appshell-logo-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: #171C2F;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.16);
+}
+.ymh-scope .appshell-newchat {
+  background: var(--orange);
+  color: var(--ymh-ink-2);
+  border: 0;
+  border-radius: var(--ymh-r-pill);
+  padding: 9px 14px;
+  font-weight: 600;
+  font-size: 12.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.ymh-scope .appshell-vessel-switch {
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: var(--ymh-r-pill);
+  background: transparent;
+  color: #ffffff;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ymh-scope .appshell-apps { display: flex; flex-direction: column; gap: 2px; }
+.ymh-scope .appshell-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--ymh-muted-lighter);
+  font-size: 11.5px;
+}
+.ymh-scope .appshell-nav-item .lock { margin-left: auto; }
+.ymh-scope .appshell-upgrade {
+  background: #0f1c30;
+  border: 1px solid rgba(191,204,222,.28);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ymh-scope .appshell-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--ymh-muted-lighter);
+  font-size: 11.5px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.ymh-scope .appshell-rail { display: none; }
+
+@media (min-width: 1024px) {
+  .ymh-scope {
+    display: grid;
+    grid-template-columns: 256px minmax(0, 1fr) 290px;
+    grid-template-rows: 60px 1fr;
+    height: 100vh;
+    transition: grid-template-columns 0.3s ease;
+  }
+  @media (min-width: 1440px) {
+    .ymh-scope { grid-template-columns: 256px minmax(0, 1fr) 320px; }
+  }
+
+  .ymh-scope.rail-collapsed { grid-template-columns: 256px minmax(0, 1fr) 0px !important; }
+  .ymh-scope.rail-collapsed .appshell-rail { width: 0 !important; padding: 0 !important; border: 0 !important; opacity: 0; pointer-events: none; }
+
+  .ymh-scope .mobile-backdrop, .ymh-scope .tb-burger-btn { display: none !important; }
+  .ymh-scope .appshell-sidebar { position: static; grid-column: 1; grid-row: 1 / span 2; width: 256px; height: 100vh; transform: none; box-shadow: none; z-index: 1; }
+  .ymh-scope .appshell-topbar { grid-column: 2; grid-row: 1; height: 60px; padding: 0 24px; border-right: 1px solid var(--ymh-line); }
+  .ymh-scope .tb-crumb-desktop { display: inline-block; color: var(--ymh-link); font-size: 12.5px; }
+  .ymh-scope .tb-crumb-desktop::before { content: "·"; margin-right: 8px; color: var(--ymh-muted); }
+  .ymh-scope .tb-actions-desktop { display: flex; align-items: center; gap: 10px; }
+  .ymh-scope .tb-chip-btn { padding: 5px 12px; border-radius: var(--ymh-r-pill); background: #ffffff; border: 1px solid var(--ymh-line); color: var(--ymh-link); font-size: 11.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+  .ymh-scope .tb-cta-orange { padding: 6px 14px; border-radius: var(--ymh-r-pill); background: var(--orange); color: var(--ymh-ink-2); font-size: 11.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+
+  .ymh-scope .appshell-main { grid-column: 2; grid-row: 2; height: calc(100vh - 60px); overflow-y: auto; padding: 20px 24px 16px; border-right: 1px solid var(--ymh-line); }
+  .ymh-scope .oemd-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .ymh-scope .mobile-bottom-dock { position: sticky; bottom: 0; margin-top: auto; padding: 16px 0 8px; background: linear-gradient(180deg, rgba(248,250,252,0) 0%, rgba(248,250,252,0.96) 20%, #f8fafc 100%); }
+  .ymh-scope .chat-disclaimer { display: block; }
+
+  .ymh-scope .appshell-rail {
+    position: static;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: 290px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-left: 1px solid var(--ymh-line);
+    padding: 20px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    scrollbar-width: thin;
+    z-index: 10;
+  }
+  @media (min-width: 1440px) { .ymh-scope .appshell-rail { width: 320px; } }
+
+  .ymh-scope .yacht-upload-card {
+    width: 260px;
+    height: 130px;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(14, 28, 50, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #0E1C32 0%, #1B2B41 100%);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    will-change: transform, box-shadow;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease;
+  }
+  .ymh-scope .yacht-upload-card:hover {
+    transform: translateY(-2px) scale(1.012);
+    box-shadow: 0 10px 24px rgba(14, 28, 50, 0.24);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  .ymh-scope .yacht-upload-card:active {
+    transform: scale(0.985);
+    transition-duration: 0.15s;
+  }
+  .ymh-scope .yacht-upload-card svg g,
+  .ymh-scope .yacht-upload-card svg text {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  }
+  .ymh-scope .yacht-upload-card:hover svg g {
+    transform: translateY(-1.5px);
+  }
+  .ymh-scope .yacht-upload-preview { display: none; width: 100%; height: 100%; object-fit: cover; }
+
+  .ymh-scope .vessel-content-block {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ymh-scope .vessel-head-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b1e33;
+    line-height: 1.25;
+    margin: 0 0 3px;
+    letter-spacing: -0.01em;
+  }
+  .ymh-scope .vessel-head-sub {
+    font-size: 12.5px;
+    color: #6a7c93;
+    margin: 0 0 14px;
+  }
+  .ymh-scope .vessel-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .ymh-scope .vessel-progress-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #6a7c93;
+    text-transform: uppercase;
+  }
+  .ymh-scope .vessel-progress-pct {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f5a623;
+  }
+  .ymh-scope .vessel-progress-bar {
+    height: 6px;
+    background: #f1f3f6;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .ymh-scope .vessel-progress-fill {
+    height: 100%;
+    width: 20%;
+    background: #f5a623;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .ymh-scope .vessel-progress-hint {
+    font-size: 11px;
+    color: #f5a623;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 1.35;
+    display: inline-block;
+  }
+  .ymh-scope .vessel-progress-hint:hover { text-decoration: underline; }
+
+  .ymh-scope .vessel-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .ymh-scope .vessel-section-title {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #6a7c93;
+    text-transform: uppercase;
+  }
+  .ymh-scope .vessel-locked-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #fff6e8;
+    color: #f5a623;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .ymh-scope .vessel-due-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #f1f3f6;
+    margin-bottom: 6px;
+  }
+  .ymh-scope .vessel-due-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f5a623;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .ymh-scope .vessel-due-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .ymh-scope .vessel-due-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #0b1e33;
+  }
+  .ymh-scope .vessel-due-sub {
+    font-size: 11px;
+    color: #8c9eb8;
+  }
+
+  .ymh-scope .vessel-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #eef1f5;
+    color: #0b1e33;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 6px;
+  }
+  .ymh-scope .vessel-action-btn:hover {
+    border-color: rgba(245, 166, 35, 0.4);
+    box-shadow: 0 2px 8px rgba(11, 20, 32, 0.05);
+    transform: translateY(-1px);
+  }
+  .ymh-scope .vessel-action-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ymh-scope .vessel-action-icon {
+    color: #6a7c93;
+    display: grid;
+    place-items: center;
+  }
+  .ymh-scope .vessel-action-arrow {
+    color: #8c9eb8;
+    font-size: 13px;
+  }
+
+  .ymh-scope .vessel-unlock-card {
+    border-radius: 14px;
+    padding: 16px 14px;
+    background: linear-gradient(145deg, #f9903b 0%, #ff6b3d 100%);
+    color: #ffffff;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(249, 144, 59, 0.25);
+  }
+  .ymh-scope .vessel-unlock-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0b1728;
+    letter-spacing: -0.01em;
+  }
+  .ymh-scope .vessel-unlock-sub {
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: #2c1a0e;
+    font-weight: 500;
+  }
+  .ymh-scope .vessel-unlock-btn {
+    align-self: flex-start;
+    margin-top: 4px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #0f1c30;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ymh-scope .vessel-unlock-btn:hover {
+    background: #172b47;
+    transform: translateY(-1px);
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="ymh-scope" id="appShellRoot">
+  <div class="mobile-backdrop" id="drawerBackdrop"></div>
+
+  <!-- 1. Sidebar -->
+  <aside class="appshell-sidebar" id="sidebarPanel">
+    <div class="appshell-logo">
+      <div class="appshell-logo-mark">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><path d="M2 17l20 0M5 17l2-9h10l2 9M12 3v5"/></svg>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#fff;">Yachtmasters Hub</div>
+        <div style="font-size:10.5px;color:var(--ymh-muted-light);">Free chat · 12 questions</div>
+      </div>
+    </div>
+
+    <button class="appshell-newchat" type="button">+ New chat</button>
+    <button class="appshell-vessel-switch" type="button"><span>Your vessel</span><span>▼</span></button>
+
+    <div>
+      <div style="font-size:9px;font-weight:600;color:var(--ymh-muted-light);letter-spacing:.08em;">YOUR CHATS</div>
+      <div style="padding:4px 0;color:var(--ymh-muted);font-size:11.5px;">No chats yet. Ask below to start one.</div>
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <div>
+      <div style="font-size:9px;font-weight:600;color:var(--ymh-muted-light);letter-spacing:.08em;margin-bottom:4px;">APPS</div>
+      <nav class="appshell-apps">
+        <!-- Projects Hub -->
+        <a class="appshell-nav-item" href="#">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.25 1.75H2.33333C2.01117 1.75 1.75 2.01117 1.75 2.33333V5.25C1.75 5.57217 2.01117 5.83333 2.33333 5.83333H5.25C5.57217 5.83333 5.83333 5.57217 5.83333 5.25V2.33333C5.83333 2.01117 5.57217 1.75 5.25 1.75Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.6667 1.75H8.75C8.42784 1.75 8.16667 2.01117 8.16667 2.33333V5.25C8.16667 5.57217 8.42784 5.83333 8.75 5.83333H11.6667C11.9888 5.83333 12.25 5.57217 12.25 5.25V2.33333C12.25 2.01117 11.9888 1.75 11.6667 1.75Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.6667 8.16666H8.75C8.42784 8.16666 8.16667 8.42782 8.16667 8.74999V11.6667C8.16667 11.9888 8.42784 12.25 8.75 12.25H11.6667C11.9888 12.25 12.25 11.9888 12.25 11.6667V8.74999C12.25 8.42782 11.9888 8.16666 11.6667 8.16666Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5.25 8.16666H2.33333C2.01117 8.16666 1.75 8.42782 1.75 8.74999V11.6667C1.75 11.9888 2.01117 12.25 2.33333 12.25H5.25C5.57217 12.25 5.83333 11.9888 5.83333 11.6667V8.74999C5.83333 8.42782 5.57217 8.16666 5.25 8.16666Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Projects Hub</span>
+          <svg class="lock" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#f5a623" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </a>
+        <!-- Equipment -->
+        <a class="appshell-nav-item" href="#">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.575 3.67501C8.46812 3.78405 8.40825 3.93065 8.40825 4.08334C8.40825 4.23603 8.46812 4.38263 8.575 4.49168L9.50833 5.42501C9.61737 5.53189 9.76398 5.59176 9.91667 5.59176C10.0694 5.59176 10.216 5.53189 10.325 5.42501L12.5242 3.22584C12.8175 3.87404 12.9063 4.59623 12.7788 5.29618C12.6512 5.99612 12.3134 6.64058 11.8103 7.14367C11.3072 7.64676 10.6628 7.98458 9.96283 8.11211C9.26289 8.23964 8.54069 8.15083 7.8925 7.85751L3.86167 11.8883C3.6296 12.1204 3.31485 12.2508 2.98667 12.2508C2.65848 12.2508 2.34373 12.1204 2.11167 11.8883C1.8796 11.6563 1.74923 11.3415 1.74923 11.0133C1.74923 10.6852 1.8796 10.3704 2.11167 10.1383L6.1425 6.10751C5.84918 5.45932 5.76037 4.73712 5.8879 4.03717C6.01543 3.33723 6.35325 2.69277 6.85634 2.18968C7.35942 1.68659 8.00388 1.34877 8.70383 1.22124C9.40378 1.09371 10.126 1.18252 10.7742 1.47584L8.58083 3.66918L8.575 3.67501Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Equipment</span>
+          <svg class="lock" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#f5a623" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </a>
+        <!-- Documents -->
+        <a class="appshell-nav-item" href="#">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.45833 1.16666H3.5C3.19058 1.16666 2.89384 1.28957 2.67504 1.50837C2.45625 1.72716 2.33333 2.0239 2.33333 2.33332V11.6667C2.33333 11.9761 2.45625 12.2728 2.67504 12.4916C2.89384 12.7104 3.19058 12.8333 3.5 12.8333H10.5C10.8094 12.8333 11.1062 12.7104 11.325 12.4916C11.5438 12.2728 11.6667 11.9761 11.6667 11.6667V4.37499L8.45833 1.16666Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8.16667 1.16666V4.66666H11.6667" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Documents</span>
+          <svg class="lock" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#f5a623" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </a>
+        <!-- Inspections -->
+        <a class="appshell-nav-item" href="#">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#BFCCDE" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="m9 15 2 2 4-4"/></svg>
+          <span>Inspections</span>
+          <svg class="lock" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#f5a623" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </a>
+        <!-- Settings -->
+        <a class="appshell-nav-item" href="#">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_102_887_sb)">
+              <path d="M7 8.75C7.9665 8.75 8.75 7.9665 8.75 7C8.75 6.0335 7.9665 5.25 7 5.25C6.0335 5.25 5.25 6.0335 5.25 7C5.25 7.9665 6.0335 8.75 7 8.75Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.3167 8.74998C11.239 8.92592 11.2159 9.12109 11.2502 9.31032C11.2845 9.49955 11.3747 9.67417 11.5092 9.81165L11.5442 9.84665C11.6526 9.955 11.7387 10.0837 11.7974 10.2253C11.8561 10.3669 11.8863 10.5187 11.8863 10.6721C11.8863 10.8254 11.8561 10.9772 11.7974 11.1188C11.7387 11.2605 11.6526 11.3891 11.5442 11.4975C11.4358 11.606 11.3071 11.692 11.1655 11.7507C11.0239 11.8094 10.8721 11.8396 10.7188 11.8396C10.5654 11.8396 10.4136 11.8094 10.272 11.7507C10.1304 11.692 10.0017 11.606 9.89333 11.4975L9.85833 11.4625C9.72085 11.328 9.54624 11.2378 9.35701 11.2035C9.16778 11.1692 8.97261 11.1923 8.79667 11.27C8.62413 11.3439 8.47699 11.4667 8.37335 11.6232C8.2697 11.7797 8.21408 11.9631 8.21333 12.1508V12.25C8.21333 12.5594 8.09042 12.8561 7.87162 13.0749C7.65283 13.2937 7.35609 13.4166 7.04667 13.4166C6.73725 13.4166 6.4405 13.2937 6.22171 13.0749C6.00292 12.8561 5.88 12.5594 5.88 12.25V12.1975C5.87548 12.0044 5.81299 11.8171 5.70063 11.6601C5.58828 11.503 5.43126 11.3833 5.25 11.3166C5.07406 11.239 4.87889 11.2158 4.68966 11.2501C4.50043 11.2845 4.32581 11.3747 4.18833 11.5091L4.15333 11.5441C4.04498 11.6526 3.91631 11.7387 3.77468 11.7974C3.63305 11.8561 3.48124 11.8863 3.32792 11.8863C3.1746 11.8863 3.02278 11.8561 2.88115 11.7974C2.73952 11.7387 2.61085 11.6526 2.5025 11.5441C2.39403 11.4358 2.30798 11.3071 2.24926 11.1655C2.19055 11.0239 2.16033 10.872 2.16033 10.7187C2.16033 10.5654 2.19055 10.4136 2.24926 10.272C2.30798 10.1303 2.39403 10.0017 2.5025 9.89331L2.5375 9.85831C2.67198 9.72083 2.76219 9.54622 2.7965 9.35699C2.83081 9.16776 2.80765 8.97259 2.73 8.79665C2.65606 8.62411 2.53327 8.47697 2.37677 8.37333C2.22027 8.26968 2.03688 8.21406 1.84917 8.21331H1.75C1.44058 8.21331 1.14384 8.0904 0.925043 7.8716C0.70625 7.65281 0.583334 7.35607 0.583334 7.04665C0.583334 6.73723 0.70625 6.44048 0.925043 6.22169C1.14384 6.0029 1.44058 5.87998 1.75 5.87998H1.8025C1.99558 5.87546 2.18284 5.81297 2.33993 5.70061C2.49701 5.58826 2.61667 5.43124 2.68333 5.24998C2.76098 5.07404 2.78415 4.87887 2.74984 4.68964C2.71553 4.50041 2.62531 4.32579 2.49083 4.18831L2.45583 4.15331C2.34736 4.04496 2.26131 3.91629 2.2026 3.77466C2.14389 3.63303 2.11367 3.48121 2.11367 3.3279C2.11367 3.17458 2.14389 3.02276 2.2026 2.88113C2.26131 2.7395 2.34736 2.61083 2.45583 2.50248C2.56419 2.39401 2.69286 2.30795 2.83449 2.24924C2.97612 2.19053 3.12793 2.16031 3.28125 2.16031C3.43457 2.16031 3.58638 2.19053 3.72801 2.24924C3.86965 2.30795 3.99832 2.39401 4.10667 2.50248L4.14167 2.53748C4.27915 2.67196 4.45376 2.76217 4.64299 2.79648C4.83222 2.83079 5.02739 2.80763 5.20333 2.72998H5.25C5.42253 2.65603 5.56968 2.53325 5.67332 2.37675C5.77697 2.22025 5.83259 2.03686 5.83333 1.84915V1.74998C5.83333 1.44056 5.95625 1.14381 6.17504 0.925022C6.39384 0.706229 6.69058 0.583313 7 0.583313C7.30942 0.583313 7.60617 0.706229 7.82496 0.925022C8.04375 1.14381 8.16667 1.44056 8.16667 1.74998V1.80248C8.16742 1.99019 8.22304 2.17358 8.32668 2.33008C8.43032 2.48659 8.57747 2.60937 8.75 2.68331C8.92594 2.76096 9.12111 2.78413 9.31034 2.74982C9.49957 2.7155 9.67419 2.62529 9.81167 2.49081L9.84667 2.45581C9.95502 2.34734 10.0837 2.26129 10.2253 2.20258C10.367 2.14386 10.5188 2.11365 10.6721 2.11365C10.8254 2.11365 10.9772 2.14386 11.1188 2.20258C11.2605 2.26129 11.3891 2.34734 11.4975 2.45581C11.606 2.56416 11.692 2.69283 11.7507 2.83447C11.8094 2.9761 11.8397 3.12791 11.8397 3.28123C11.8397 3.43455 11.8094 3.58636 11.7507 3.72799C11.692 3.86962 11.606 3.99829 11.4975 4.10665L11.4625 4.14165C11.328 4.27913 11.2378 4.45374 11.2035 4.64297C11.1692 4.8322 11.1923 5.02737 11.27 5.20331V5.24998C11.3439 5.42251 11.4667 5.56966 11.6232 5.6733C11.7797 5.77694 11.9631 5.83256 12.1508 5.83331H12.25C12.5594 5.83331 12.8562 5.95623 13.075 6.17502C13.2938 6.39381 13.4167 6.69056 13.4167 6.99998C13.4167 7.3094 13.2938 7.60614 13.075 7.82494C12.8562 8.04373 12.5594 8.16665 12.25 8.16665H12.1975C12.0098 8.16739 11.8264 8.22301 11.6699 8.32666C11.5134 8.4303 11.3906 8.57745 11.3167 8.74998Z" stroke="#BFCCDE" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_102_887_sb">
+                <rect width="14" height="14" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <span>Settings</span>
+          <svg class="lock" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#f5a623" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </a>
+      </nav>
+    </div>
+
+    <div class="appshell-upgrade">
+      <div style="font-size:8.5px;font-weight:600;color:var(--ymh-muted-light);">UNLOCK THE FULL APP</div>
+      <div style="font-size:11.5px;font-weight:600;color:var(--orange);">Fleet dashboard, saved chats, service tracking.</div>
+      <a style="font-size:10.5px;font-weight:600;color:var(--orange);" href="#">Get on the app →</a>
+    </div>
+
+    <button class="appshell-logout" type="button">→] Log in</button>
+  </aside>
+
+  <!-- 2. Topbar -->
+  <header class="appshell-topbar">
+    <button class="tb-burger-btn" id="openSidebarBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="tb-title-container">
+      <span class="tb-main-title">Yachtmasters Hub</span>
+      <span class="tb-crumb-desktop">Guided demo · add your boat to unlock</span>
+    </div>
+    <div class="tb-actions-desktop">
+      <a class="tb-chip-btn" href="#"><span>What can I ask?</span></a>
+      <a class="tb-cta-orange" href="#">Get the app →</a>
+    </div>
+    <button class="tb-notif-btn" aria-label="Notifications">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6a4 4 0 018 0v3l1 2H3l1-2V6zM6.5 13a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </header>
+
+  <!-- 3. Contenedor Central -->
+  <main class="appshell-main">
+    <div class="oemd-welcome-h">A chief engineer, on tap.</div>
+    <div class="oemd-welcome-sub">Tell me about your boat and I'll set up your workspace. Or just start asking anything technical.</div>
+
+    <div class="oemd-tiles">
+      <button class="oemd-tile" type="button">
+        <span class="oemd-tile-stripe stripe-orange"></span>
+        <span class="oemd-tile-inner">
+          <span class="oemd-tile-left">
+            <span class="oemd-tile-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <span class="oemd-tile-text">
+              <span class="oemd-tile-title">Troubleshoot a system</span>
+              <span class="oemd-tile-sub">Diesel, electrical, hydraulic, AC, electronics. Diagnose an unwanted behavior.</span>
+            </span>
+          </span>
+          <span class="oemd-tile-cta">→</span>
+        </span>
+      </button>
+
+      <button class="oemd-tile" type="button">
+        <span class="oemd-tile-stripe stripe-blue"></span>
+        <span class="oemd-tile-inner">
+          <span class="oemd-tile-left">
+            <span class="oemd-tile-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <span class="oemd-tile-text">
+              <span class="oemd-tile-title">Ask about this boat</span>
+              <span class="oemd-tile-sub">Service intervals, torque specs, part numbers, general marine guidance.</span>
+            </span>
+          </span>
+          <span class="oemd-tile-cta">→</span>
+        </span>
+      </button>
+
+      <button class="oemd-tile" type="button">
+        <span class="oemd-tile-stripe stripe-green"></span>
+        <span class="oemd-tile-inner">
+          <span class="oemd-tile-left">
+            <span class="oemd-tile-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </span>
+            <span class="oemd-tile-text">
+              <span class="oemd-tile-title">Safety checks before departure</span>
+              <span class="oemd-tile-sub">Fuel, oil, cooling, batteries, safety gear, EPIRB, comms. Walk the checklist in 3 minutes.</span>
+            </span>
+          </span>
+          <span class="oemd-tile-cta">→</span>
+        </span>
+      </button>
+
+      <button class="oemd-tile" type="button">
+        <span class="oemd-tile-stripe stripe-coral"></span>
+        <span class="oemd-tile-inner">
+          <span class="oemd-tile-left">
+            <span class="oemd-tile-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </span>
+            <span class="oemd-tile-text">
+              <span class="oemd-tile-title">Photo of what's broken</span>
+              <span class="oemd-tile-sub">Upload a picture. We identify the component and diagnose it.</span>
+            </span>
+          </span>
+          <span class="oemd-tile-cta">→</span>
+        </span>
+      </button>
+
+      <button class="oemd-tile" type="button">
+        <span class="oemd-tile-stripe stripe-navy"></span>
+        <span class="oemd-tile-inner">
+          <span class="oemd-tile-left">
+            <span class="oemd-tile-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="m9 15 2 2 4-4"/></svg>
+            </span>
+            <span class="oemd-tile-text">
+              <span class="oemd-tile-title">Weekly inspection</span>
+              <span class="oemd-tile-sub">Bilge, batteries, shore power, lines, anodes, hull. 8-item walk you should do every Sunday.</span>
+            </span>
+          </span>
+          <span class="oemd-tile-cta">→</span>
+        </span>
+      </button>
+
+      <button class="oemd-tile disabled" type="button">
+        <span class="oemd-tile-stripe stripe-gray"></span>
+        <span class="oemd-tile-inner">
+          <span class="oemd-tile-left">
+            <span class="oemd-tile-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.8"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            <span class="oemd-tile-text">
+              <span class="oemd-tile-title">Yacht Passport</span>
+              <span class="oemd-tile-sub">Portable digital record of your vessel. Available when you get the full app.</span>
+            </span>
+          </span>
+          <span class="oemd-tile-cta">→</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="oemd-ask-label">Or simply begin chatting</div>
+
+    <!-- Barra Inferior -->
+    <div class="mobile-bottom-dock">
+      <div class="oemd-mode-row">
+        <button class="oemd-mode vessel" type="button">Your vessel</button>
+        <button class="oemd-mode active" type="button">Ask</button>
+        <button class="oemd-mode" type="button">Troubleshoot</button>
+        <button class="oemd-mode" type="button">Safety</button>
+        <button class="oemd-mode" type="button">Photo</button>
+        <button class="oemd-mode" type="button">Weekly</button>
+      </div>
+
+      <div class="chat-input-wrap">
+        <button class="chat-btn-icon" aria-label="Attach file">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+        </button>
+        <input class="chat-input" type="text" placeholder="Ask anything about your yacht…" />
+        <button class="chat-btn-icon" aria-label="Mic">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+        </button>
+        <button class="chat-btn-send" aria-label="Send">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </button>
+      </div>
+
+      <div class="chat-disclaimer">
+        <div style="font-weight:600;margin-bottom:2px;">Free session, 12 questions in the tank</div>
+        The engineer is an AI and can make mistakes. Check anything safety critical against the manual. <a href="#">How it works</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- 4. Tercera Columna Independiente -->
+  <aside class="appshell-rail" id="passportRail">
+    <input type="file" id="yachtPhotoInput" accept="image/*" style="display:none;" />
+
+    <!-- Cuadro interactivo para subir foto del barco (260px x 130px) -->
+    <div class="yacht-upload-card" id="yachtUploadCard" title="Click to upload yacht photo">
+      <svg id="yachtUploadSvg" width="260" height="130" viewBox="0 0 260 130" fill="none">
+        <rect width="260" height="130" rx="12" fill="url(#paint0_linear_opt)"/>
+        <g stroke="#BFCCDE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M133 46h-6l-3 3h-4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V51a2 2 0 0 0-2-2h-4l-3-3z"/>
+          <circle cx="130" cy="56" r="3.5"/>
+        </g>
+        <text x="130" y="86" fill="#BFCCDE" font-family="system-ui, sans-serif" font-size="11" font-weight="600" text-anchor="middle" letter-spacing="0.4">Add photo of your yacht</text>
+        <defs>
+          <linearGradient id="paint0_linear_opt" x1="0" y1="0" x2="260" y2="130" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0E1C32"/>
+            <stop offset="1" stop-color="#1B2B41"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <img class="yacht-upload-preview" id="yachtUploadPreview" alt="Yacht Photo" />
+    </div>
+
+    <!-- Contenido referente exacto -->
+    <div class="vessel-content-block">
+      <!-- Bloque Superior: Your Vessel & Completeness -->
+      <div>
+        <h2 class="vessel-head-title">Your Vessel</h2>
+        <p class="vessel-head-sub">Identify your boat in the chat</p>
+
+        <div class="vessel-progress-header">
+          <span class="vessel-progress-label">PROFILE COMPLETENESS</span>
+          <span class="vessel-progress-pct" id="passportProgressLabel">20%</span>
+        </div>
+
+        <div class="vessel-progress-bar">
+          <div class="vessel-progress-fill" id="passportProgressFill"></div>
+        </div>
+
+        <a href="#" class="vessel-progress-hint">Add HIN, engine hours, insurance dates to complete &rarr;</a>
+      </div>
+
+      <!-- Bloque Central: NEXT 3 DUE -->
+      <div>
+        <div class="vessel-section-header">
+          <span class="vessel-section-title">NEXT 3 DUE</span>
+          <span class="vessel-locked-badge">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            LOCKED
+          </span>
+        </div>
+
+        <div class="vessel-due-card">
+          <div class="vessel-due-bullet"></div>
+          <div class="vessel-due-text">
+            <span class="vessel-due-title">20-hour break-in service</span>
+            <span class="vessel-due-sub">in 12 days · with the full app</span>
+          </div>
+        </div>
+
+        <div class="vessel-due-card">
+          <div class="vessel-due-bullet"></div>
+          <div class="vessel-due-text">
+            <span class="vessel-due-title">FL registration renewal</span>
+            <span class="vessel-due-sub">in 45 days · with the full app</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloque Inferior: QUICK ACTIONS -->
+      <div>
+        <div class="vessel-section-header">
+          <span class="vessel-section-title">QUICK ACTIONS</span>
+          <span class="vessel-locked-badge">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            LOCKED
+          </span>
+        </div>
+
+        <button type="button" class="vessel-action-btn">
+          <span class="vessel-action-left">
+            <span class="vessel-action-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span>Run pre-trip</span>
+          </span>
+          <span class="vessel-action-arrow">&rarr;</span>
+        </button>
+
+        <button type="button" class="vessel-action-btn">
+          <span class="vessel-action-left">
+            <span class="vessel-action-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <span>Log a service</span>
+          </span>
+          <span class="vessel-action-arrow">&rarr;</span>
+        </button>
+
+        <button type="button" class="vessel-action-btn">
+          <span class="vessel-action-left">
+            <span class="vessel-action-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </span>
+            <span>Add expense</span>
+          </span>
+          <span class="vessel-action-arrow">&rarr;</span>
+        </button>
+      </div>
+
+      <!-- Banner Final: Unlock everything -->
+      <div class="vessel-unlock-card">
+        <div class="vessel-unlock-title">Unlock everything</div>
+        <div class="vessel-unlock-sub">Saved conversations, service tracking, next-service reminders, fleet dashboard, and the full Yacht Passport.</div>
+        <button type="button" class="vessel-unlock-btn">Get the app &rarr;</button>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<script>
+  (function() {
+    const sidebarPanel = document.getElementById('sidebarPanel');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const openSidebarBtn = document.getElementById('openSidebarBtn');
+    const yachtUploadCard = document.getElementById('yachtUploadCard');
+    const yachtPhotoInput = document.getElementById('yachtPhotoInput');
+    const yachtUploadSvg = document.getElementById('yachtUploadSvg');
+    const yachtUploadPreview = document.getElementById('yachtUploadPreview');
+    const appShellRoot = document.getElementById('appShellRoot');
+
+    if (openSidebarBtn && sidebarPanel && drawerBackdrop) {
+      openSidebarBtn.addEventListener('click', () => {
+        sidebarPanel.classList.add('open');
+        drawerBackdrop.classList.add('active');
+      });
+      drawerBackdrop.addEventListener('click', () => {
+        sidebarPanel.classList.remove('open');
+        drawerBackdrop.classList.remove('active');
+      });
+    }
+
+    if (yachtUploadCard && yachtPhotoInput) {
+      yachtUploadCard.addEventListener('click', () => yachtPhotoInput.click());
+      yachtPhotoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            yachtUploadPreview.src = event.target.result;
+            yachtUploadPreview.style.display = 'block';
+            yachtUploadSvg.style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    window.dismissPassportRail = function() {
+      if (appShellRoot) {
+        appShellRoot.classList.add('rail-collapsed');
+      }
+    };
+  })();
+</script>
+</body>
+</html>
