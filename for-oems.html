@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For OEMs | Yacht Masters Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; }
+
+* { box-sizing: border-box; }
+:root {
+  --ocean: #171C2F;
+  --mariner: #222F59;
+  --orange: #FEA200;
+  --cream: #F5F1EB;
+  --warm: #DDD9D7;
+  --disabled: #8C9196;
+  --line: rgba(245, 241, 235, 0.15);
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: "Montserrat", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fill: linear-gradient(96deg, #FEA200 0%, #FEA200 22%, #FE8352 42%, #DE6C85 58%, #7F579D 78%, #3345AF 100%);
+  --on-accent: #171C2F;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--cream);
+  background: #0d1226;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+h1, h2, h3, .serif { font-family: var(--serif); font-weight: 400; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ─── RESPLANDOR PERIMETRAL ULTRA-SUTIL Y DESVANECIDO ─── */
+.section-glow-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: screen;
+}
+
+.section-glow-overlay.active {
+  opacity: 1;
+}
+
+.section-glow-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -15px;
+  box-shadow:
+    inset 0 0 25px 4px rgba(254, 162, 0, 0.45),
+    inset 0 0 45px 12px rgba(222, 108, 133, 0.3),
+    inset 0 0 70px 25px rgba(51, 69, 175, 0.18);
+  filter: blur(24px);
+}
+
+.section-glow-overlay::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  box-shadow:
+    inset 0 0 15px 3px rgba(255, 255, 255, 0.4),
+    inset 0 0 30px 8px rgba(254, 162, 0, 0.35),
+    inset 0 0 50px 18px rgba(222, 108, 133, 0.2);
+  filter: blur(14px);
+}
+
+/* ─── VIDEO DE FONDO GLOBAL ─── */
+.global-video-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  background: url("https://www.yachtmastershub.com/assets/hero-ocean.jpg") center/cover no-repeat;
+}
+
+.global-video-bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.global-video-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 18, 38, 0.76) 0%, rgba(23, 28, 47, 0.70) 45%, rgba(13, 18, 38, 0.92) 100%);
+}
+
+/* ─── CONTENEDOR Y SLIDES ─── */
+.scroll-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.scroll-section {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  will-change: transform, opacity;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0.8s;
+  overflow-y: auto;
+  padding: 40px 24px;
+  background: transparent !important;
+}
+
+.scroll-section.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  z-index: 2;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0s;
+}
+
+.scroll-section.prev {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  z-index: 1;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s linear 0.75s;
+}
+
+/* ─── INDICADOR CONSECUTIVO ─── */
+.slide-counter {
+  position: fixed;
+  left: clamp(24px, 4vw, 60px);
+  bottom: 36px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--sans);
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.slide-counter .current-num {
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  min-width: 32px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.slide-counter .divider {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(245, 241, 235, 0.45);
+  margin: 0 4px;
+}
+
+.slide-counter .total-num {
+  font-size: 19px;
+  font-weight: 400;
+  color: rgba(245, 241, 235, 0.45);
+  letter-spacing: 0.02em;
+}
+
+/* Puntos de navegación lateral */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 100;
+}
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 241, 235, 0.35);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.4s ease, 
+              box-shadow 0.4s ease;
+}
+
+.nav-dot.active {
+  background: var(--orange);
+  transform: scale(1.5);
+  box-shadow: 0 0 12px rgba(254, 162, 0, 0.5);
+}
+
+/* ─── BOTONES ESTILO HERO ─── */
+.hero-btn,
+.hero-onboard,
+.hero-demo,
+.hero-cta {
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 14px 32px;
+  border-radius: 999px;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.hero-btn::before,
+.hero-onboard::before,
+.hero-demo::before,
+.hero-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, #FEA200 0%, #DE6C85 55%, #3345AF 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.hero-btn:hover,
+.hero-onboard:hover,
+.hero-demo:hover,
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(254, 162, 0, 0.45);
+  color: #fff;
+}
+
+.hero-btn.is-hidden { display: none !important; }
+
+/* ─── CONTENEDORES Y TIPOGRAFÍA OEM ─── */
+.oem-hero { text-align: center; }
+.oem-hero-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.oem-band-inner { max-width: 1080px; margin: 0 auto; width: 100%; }
+.oem-band h2 { font-family: var(--serif); font-size: clamp(28px, 3.4vw, 42px); line-height: 1.15; margin: 0 0 16px; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.oem-band p.lede { font-size: 16.5px; line-height: 1.6; color: rgba(245,241,235,.85); max-width: 740px; text-shadow: 0 1px 10px rgba(0,0,0,0.5); }
+
+.oem-eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(254,162,0,.15);
+  color: var(--orange);
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.oem-h1 {
+  font-family: var(--serif);
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 18px;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+}
+
+.oem-sub {
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: rgba(245,241,235,.85);
+  max-width: 680px;
+  margin: 0 auto 28px;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+}
+
+.hero-interactive-flow {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-interactive-flow.is-visible {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-ask {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 660px;
+  padding: 6px 8px 6px 20px;
+  background: rgba(23, 28, 47, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 999px;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  margin-bottom: 20px;
+}
+
+.hero-ask-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  color: #fff !important;
+  font-family: var(--sans);
+  font-size: 15.5px;
+  padding: 10px 0;
+}
+
+.hero-ask-input::placeholder {
+  color: rgba(245, 241, 235, 0.55);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero-ask-btn {
+  flex: none;
+  background: linear-gradient(90deg, #FEA200 0%, #DE6C85 55%, #3345AF 100%);
+  color: #fff;
+  border: 0 !important;
+  padding: 11px 26px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.hero-ask-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(254, 162, 0, 0.4);
+}
+
+.hero-ask-taxonomy {
+  font-size: 11.5px;
+  color: rgba(245, 241, 235, 0.6);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.hero-starters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 820px;
+  margin: 0 auto 28px;
+}
+
+.hero-starter {
+  background: rgba(245, 241, 235, 0.08);
+  border: 1px solid rgba(245, 241, 235, 0.2);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.15s ease;
+}
+
+.hero-starter:hover {
+  background: rgba(254, 162, 0, 0.16);
+  border-color: rgba(254, 162, 0, 0.55);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.hero-secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.hero-secondary-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-taxonomy {
+  font-size: 12.5px;
+  color: rgba(245, 241, 235, 0.6);
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+}
+
+/* ─── TARJETAS CRISTAL (SLIDE 2) ─── */
+.oem-band .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
+
+.oem-tile {
+  position: relative;
+  background: rgba(23, 28, 47, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 18px;
+  padding: 30px 26px;
+  text-align: left;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.45s ease, 
+              background-color 0.45s ease;
+}
+
+.oem-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1.5px;
+  background: rgba(245, 241, 235, 0.12);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.45s ease;
+}
+
+.oem-tile:hover {
+  transform: translateY(-4px);
+  background: rgba(23, 28, 47, 0.85);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45), 0 0 20px rgba(254, 162, 0, 0.12);
+}
+
+.oem-tile:hover::before {
+  background: linear-gradient(135deg, #FEA200 0%, #DE6C85 50%, #3345AF 100%);
+}
+
+.oem-tile h3 { font-family: var(--serif); font-size: 21px; margin: 0 0 10px; color: #fff; transition: color 0.3s ease; }
+.oem-tile:hover h3 { color: var(--cream); }
+.oem-tile p { font-size: 14.5px; line-height: 1.55; color: rgba(245, 241, 235, 0.72); margin: 0; transition: color 0.3s ease; }
+.oem-tile:hover p { color: rgba(245, 241, 235, 0.95); }
+.oem-tile .num { display: inline-block; font-family: var(--serif); font-size: 44px; color: var(--orange); line-height: 1; margin-bottom: 10px; transition: transform 0.3s ease; }
+.oem-tile:hover .num { transform: scale(1.03); }
+
+/* ─── PROOF BLOCK (SLIDE 4) ─── */
+.oem-proof {
+  background: rgba(15, 20, 40, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin-top: 32px;
+}
+.oem-proof-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; gap: 16px; flex-wrap: wrap; }
+.oem-proof-title { font-family: var(--serif); font-size: 22px; color: #fff; }
+.oem-proof-badge { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+.oem-proof-q { font-size: 15px; color: rgba(245,241,235,.75); font-style: italic; margin: 0 0 14px; }
+.oem-proof-a {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 18px 22px;
+  font-family: Georgia, serif;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--cream);
+}
+.oem-proof-a b { color: var(--orange); }
+.oem-proof-foot { margin-top: 18px; font-size: 13px; color: rgba(245,241,235,.6); text-align: center; }
+.oem-proof-foot a { color: var(--orange); text-decoration: underline; font-weight: 600; }
+
+/* ─── MÉTRICAS Y SEGURIDAD (SLIDE 5) ─── */
+.oem-nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+.oem-num {
+  text-align: center;
+  padding: 26px 12px;
+  background: rgba(23, 28, 47, 0.65);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s ease;
+}
+.oem-num:hover { transform: translateY(-3px); }
+.oem-num-big { font-family: var(--serif); font-size: 42px; color: var(--orange); line-height: 1; margin-bottom: 8px; }
+.oem-num-sub { font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: rgba(245,241,235,.75); font-weight: 600; }
+
+.oem-security {
+  padding: 24px 26px;
+  background: rgba(23, 28, 47, 0.65);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  margin-top: 32px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(245,241,235,.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.oem-security b { color: #fff; }
+
+/* ─── PRICING GRID (SLIDE 6) CON EFECTO HOVER DE CAMBIO DE COLOR ─── */
+.oem-pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
+
+.oem-price {
+  position: relative;
+  background: rgba(23, 28, 47, 0.68);
+  border-radius: 20px;
+  padding: 34px 30px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.4s ease, 
+              box-shadow 0.4s ease;
+}
+
+/* Borde inicial sutil */
+.oem-price::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1.5px;
+  background: rgba(245, 241, 235, 0.12);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+/* Estado Hover: Cambio de tono hacia Mariner Deep + Aura y Elevación */
+.oem-price:hover {
+  transform: translateY(-6px);
+  background: rgba(34, 47, 89, 0.88);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 35px rgba(254, 162, 0, 0.22);
+}
+
+.oem-price:hover::before {
+  background: linear-gradient(135deg, #FEA200 0%, #DE6C85 50%, #3345AF 100%);
+}
+
+.oem-price h3 { 
+  font-family: var(--serif); 
+  font-size: 25px; 
+  color: #fff; 
+  margin: 0 0 6px; 
+  transition: color 0.3s ease; 
+}
+.oem-price:hover h3 { color: #ffffff; }
+
+.oem-price .amt { 
+  font-family: var(--serif); 
+  font-size: 44px; 
+  color: var(--orange); 
+  line-height: 1; 
+  margin: 14px 0 4px; 
+  transition: transform 0.3s ease, color 0.3s ease; 
+}
+.oem-price:hover .amt { 
+  transform: scale(1.02); 
+  color: #ffb834; 
+}
+
+.oem-price .per { 
+  font-size: 11.5px; 
+  color: rgba(245, 241, 235, 0.6); 
+  letter-spacing: .09em; 
+  text-transform: uppercase; 
+  font-weight: 600; 
+  transition: color 0.3s ease; 
+}
+.oem-price:hover .per { color: rgba(245, 241, 235, 0.85); }
+
+.oem-price ul { 
+  list-style: none; 
+  padding: 0; 
+  margin: 24px 0 30px; 
+  font-size: 14.5px; 
+  line-height: 1.6; 
+  color: rgba(245, 241, 235, 0.78); 
+  flex: 1; 
+  transition: color 0.3s ease; 
+}
+.oem-price:hover ul { color: rgba(245, 241, 235, 0.96); }
+
+.oem-price li { 
+  padding-left: 24px; 
+  position: relative; 
+  margin-bottom: 10px; 
+}
+.oem-price li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 6px;
+  width: 14px; height: 14px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FEA200' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
+  transition: transform 0.3s ease;
+}
+.oem-price:hover li::before { transform: scale(1.15); }
+
+/* Botón interno de la tarjeta que responde al hover */
+.oem-price .hero-cta {
+  width: 100%;
+}
+.oem-price:hover .hero-cta {
+  background: rgba(254, 162, 0, 0.16);
+  box-shadow: 0 10px 25px rgba(254, 162, 0, 0.35);
+}
+
+/* ─── SLIDE 7 FINAL ─── */
+.oem-final { text-align: center; }
+.oem-final h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); color: #fff; margin: 0 0 14px; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.oem-final p { color: rgba(245,241,235,.8); max-width: 560px; margin: 0 auto 28px; font-size: 16px; line-height: 1.55; }
+.oem-final-ctas { display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 860px) {
+  .oem-band .grid-3 { grid-template-columns: 1fr; }
+  .oem-nums { grid-template-columns: repeat(2, 1fr); }
+  .oem-pricing-grid { grid-template-columns: 1fr; }
+  .hero-ask { padding: 4px 6px 4px 16px; }
+  .hero-ask-btn { padding: 10px 18px; font-size: 13.5px; }
+  .hero-starters { gap: 6px; }
+  .hero-starter { font-size: 12px; padding: 6px 12px; }
+  .hero-secondary-actions, .oem-final-ctas { flex-direction: column; gap: 10px; }
+}
+
+</style>
+</head>
+<body>
+  <!-- RESPLANDOR PERIFÉRICO DESVANECIDO -->
+  <div class="section-glow-overlay" id="sectionGlow"></div>
+
+  <!-- VIDEO PERSISTENTE -->
+  <div class="global-video-bg">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://www.yachtmastershub.com/assets/hero-ocean.jpg">
+      <source src="https://www.yachtmastershub.com/assets/videos/hero.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- CONSECUTIVO DINÁMICO (06/07) -->
+  <div class="slide-counter" id="slideCounter">
+    <span class="current-num" id="currentNum">01</span><span class="divider">/</span><span class="total-num" id="totalNum">07</span>
+  </div>
+
+  <!-- PUNTOS LATERALES -->
+  <div class="nav-dots" id="navDots"></div>
+
+  <main class="scroll-container" id="scrollContainer">
+    
+    <!-- SLIDE 01: HERO -->
+    <section class="scroll-section oem-hero active">
+      <div class="oem-hero-inner">
+        <div class="oem-eyebrow">For yacht builders</div>
+        <h1 class="oem-h1">Owner support, on tap.<br />Factory-authorized. In 30 days.</h1>
+        <p class="oem-sub">A branded AI engineer that knows every model you build, quotes your service intervals, and answers your owners' questions with the depth of a chief engineer, all day, every day. Deployed on your domain. Trained on your data.</p>
+        
+        <button class="hero-btn" id="startTrialBtn">
+          Start Free Trial <span aria-hidden="true">&rarr;</span>
+        </button>
+
+        <div class="hero-interactive-flow" id="heroInteractiveFlow">
+          <form class="hero-ask" id="heroAskForm" role="search" aria-label="Ask the engineer" onsubmit="event.preventDefault();">
+            <input 
+              type="text" 
+              class="hero-ask-input" 
+              id="heroAskInput" 
+              placeholder="Ask anything about your yacht..." 
+              autocomplete="off" 
+              spellcheck="false"
+            />
+            <button type="submit" class="hero-ask-btn" aria-label="Ask">Ask <span aria-hidden="true">&rarr;</span></button>
+          </form>
+
+          <div class="hero-ask-taxonomy">FREE &middot; ANY YACHT &middot; NO SIGNUP</div>
+
+          <div class="hero-starters" role="list">
+            <button class="hero-starter" role="listitem" data-q="I've got a fault code, ">Fault code interpretation</button>
+            <button class="hero-starter" role="listitem" data-q="I'm troubleshooting a symptom, ">Symptom troubleshooting</button>
+            <button class="hero-starter" role="listitem" data-q="I need a part for my ">Find a part</button>
+            <button class="hero-starter" role="listitem" data-q="What's due for service on my ">Service intervals</button>
+            <button class="hero-starter" role="listitem" data-q="I've got a service or yard visit coming up, ">Yard or service prep</button>
+            <button class="hero-starter" role="listitem" data-q="Compliance check for ">Compliance check</button>
+          </div>
+
+          <div class="hero-secondary">
+            <div class="hero-secondary-actions">
+              <button class="hero-onboard">Get on the app <span aria-hidden="true">&rarr;</span></button>
+              <a class="hero-demo" href="/engineer">Try the engineer free <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <span class="hero-taxonomy">Ask any marine engineering question. No signup, no card. 90 seconds to get on board.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 02: THE PROBLEM -->
+    <section class="scroll-section oem-band">
+      <div class="oem-band-inner">
+        <h2>Your owners have questions. Your dealers are booked out for weeks.</h2>
+        <p class="lede">Your marketing team put together beautiful brochures. Your dealer network is doing their best. But when a captain's engine throws a fault code at 3 AM in the Bahamas, they're on Google, on forums, and on YouTube. Not on your site.</p>
+        <div class="grid-3">
+          <div class="oem-tile">
+            <span class="num">1</span>
+            <h3>Owners search alone</h3>
+            <p>60% of owner-support questions never reach a dealer. Captains fix things off Google, guess, or wait. Your brand is invisible in the moment that matters.</p>
+          </div>
+          <div class="oem-tile">
+            <span class="num">2</span>
+            <h3>Dealers are stretched</h3>
+            <p>Your service network handles the hard cases. It should not be answering "what's my 250-hour service" or "which Racor fits this engine." Free them up.</p>
+          </div>
+          <div class="oem-tile">
+            <span class="num">3</span>
+            <h3>Bad answers hurt your resale</h3>
+            <p>Every wrong forum post ("just deleted my EGR, runs great") becomes tomorrow's failure. And tomorrow's insurance claim. And tomorrow's negative review.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 03: WHAT WE BUILD -->
+    <section class="scroll-section oem-band">
+      <div class="oem-band-inner">
+        <h2>What we build for you.</h2>
+        <p class="lede">A factory-authorized owner-support surface deployed on your brand, connected to your service data, live in 30 days.</p>
+        <div style="margin-top: 30px; text-align: center;">
+          <a href="/engineer" style="display:inline-block; border-radius: 16px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.14); max-width: 680px;">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect width='100%' height='100%' fill='%230f1428'/><text x='50%' y='50%' fill='%23fea200' font-family='sans-serif' font-size='22' text-anchor='middle'>YMH OEM Support Surface Interface</text></svg>" alt="Dashboard Demo Preview" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 04: PROOF BLOCK -->
+    <section class="scroll-section oem-band">
+      <div class="oem-band-inner">
+        <h2>Trained on your real technical documentation.</h2>
+        <p class="lede">Pulls verbatim from the factory authorized engineering model so owners get verifiable answers, not AI hallucinations.</p>
+        <div class="oem-proof">
+          <div class="oem-proof-head">
+            <span class="oem-proof-title">Live Diagnostic Query Example</span>
+            <span class="oem-proof-badge">Factory-Authorized</span>
+          </div>
+          <div class="oem-proof-q">&ldquo;What is the torque spec and procedure for the raw-water pump impeller bolts on hull #14?&rdquo;</div>
+          <div class="oem-proof-a">
+            Torque to <b>14 Nm (10.3 lb-ft)</b> in a star pattern. Ensure the housing O-ring is seated in silicone lubricant (Part #OEM-9921) before snugging. Hand-rotate the shaft 360° prior to final torquing to avoid vane pinch.
+          </div>
+          <div class="oem-proof-foot">
+            Verified directly against manufacturer service manuals. <a href="/engineer">Test live queries &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 05: METRICS & SECURITY -->
+    <section class="scroll-section oem-band">
+      <div class="oem-band-inner">
+        <h2>Impact and Enterprise Security</h2>
+        <p class="lede">Built to handle scale across fleets while protecting your proprietary blueprints and warranty documentation.</p>
+        
+        <div class="oem-nums">
+          <div class="oem-num">
+            <div class="oem-num-big">&lt; 90s</div>
+            <div class="oem-num-sub">Average Resolution Time</div>
+          </div>
+          <div class="oem-num">
+            <div class="oem-num-big">24/7</div>
+            <div class="oem-num-sub">Bridge Support Coverage</div>
+          </div>
+          <div class="oem-num">
+            <div class="oem-num-big">30</div>
+            <div class="oem-num-sub">Days to Deployment</div>
+          </div>
+          <div class="oem-num">
+            <div class="oem-num-big">100%</div>
+            <div class="oem-num-sub">On-Brand Experience</div>
+          </div>
+        </div>
+
+        <div class="oem-security">
+          <b>Enterprise data isolation:</b> Your manuals, CAD files, schematics, and warranty terms are isolated in a dedicated tenant. Your intellectual property is never trained into shared public models or exposed across OEM boundaries.
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 06: PRICING GRID CON HOVER DE COLOR -->
+    <section class="scroll-section oem-band">
+      <div class="oem-band-inner">
+        <h2>Commercial Licensing</h2>
+        <p class="lede">Straightforward per-hull licensing or unlimited fleet coverage for luxury builders.</p>
+
+        <div class="oem-pricing-grid">
+          <!-- Card 1 -->
+          <div class="oem-price">
+            <h3>Per-Hull License</h3>
+            <div class="amt">$1,200</div>
+            <div class="per">Per Hull / Lifetime</div>
+            <ul>
+              <li>Factory-authorized owner portal per vessel delivered</li>
+              <li>Trained on individual hull build specs &amp; equipment</li>
+              <li>Direct dealer-service routing</li>
+              <li>Real-time telemetry ingestion ready</li>
+              <li>Standard OEM analytics dashboard</li>
+            </ul>
+            <a href="mailto:hello@yachtmastershub.com" class="hero-cta">Request Hull License &rarr;</a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="oem-price">
+            <h3>Enterprise Builder</h3>
+            <div class="amt">Custom</div>
+            <div class="per">Fleet Production</div>
+            <ul>
+              <li>Unlimited hulls across entire active model lineup</li>
+              <li>Custom domain (support.yourbrand.com)</li>
+              <li>Direct CRM &amp; Warranty ticketing integrations</li>
+              <li>Dedicated marine engineer AI trainer</li>
+              <li>Full API &amp; VesselIQ twin integration</li>
+            </ul>
+            <a href="mailto:hello@yachtmastershub.com" class="hero-cta">Talk to Partnership Team &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 07: FINAL CTA -->
+    <section class="scroll-section oem-final">
+      <div class="oem-hero-inner">
+        <h2>Ready to put an engineer on your owner's bridge?</h2>
+        <p>Book an OEM discovery call. We'll show you the exact prototype running on one of your hulls in under 48 hours.</p>
+        <div class="oem-final-ctas">
+          <a href="mailto:hello@yachtmastershub.com" class="hero-cta">Talk to our OEM team <span aria-hidden="true">&rarr;</span></a>
+          <a href="/engineer" class="hero-cta">Explore live demo <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+
+  const sections = Array.from(document.querySelectorAll('.scroll-section'));
+  const navDotsContainer = document.getElementById('navDots');
+  
+  const currentNumEl = document.getElementById('currentNum');
+  const totalNumEl = document.getElementById('totalNum');
+  const sectionGlow = document.getElementById('sectionGlow');
+  let glowTimeout = null;
+
+  sections.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (idx === 0 ? ' active' : '');
+    dot.dataset.index = idx;
+    dot.addEventListener('click', () => goToSection(idx));
+    navDotsContainer.appendChild(dot);
+  });
+  const dots = Array.from(document.querySelectorAll('.nav-dot'));
+
+  if (totalNumEl) {
+    totalNumEl.textContent = String(sections.length).padStart(2, '0');
+  }
+
+  const startTrialBtn = document.getElementById("startTrialBtn");
+  const heroInteractiveFlow = document.getElementById("heroInteractiveFlow");
+  const heroAskInput = document.getElementById("heroAskInput");
+  const video = document.getElementById("heroVideo");
+
+  if (video) {
+    video.muted = true;
+    const p = video.play();
+    if (p !== undefined) p.catch(() => {});
+  }
+
+  document.querySelectorAll(".hero-starter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!heroAskInput) return;
+      heroAskInput.value = btn.getAttribute("data-q") || "";
+      heroAskInput.focus();
+    });
+  });
+
+  if (startTrialBtn) {
+    startTrialBtn.addEventListener("click", () => {
+      startTrialBtn.classList.add("is-hidden");
+      if (heroInteractiveFlow) heroInteractiveFlow.classList.add("is-visible");
+      setTimeout(() => {
+        if (heroAskInput) heroAskInput.focus();
+      }, 300);
+    });
+  }
+
+  let currentIndex = 0;
+  let isAnimating = false;
+
+  function triggerSectionGlow() {
+    if (!sectionGlow) return;
+    if (glowTimeout) clearTimeout(glowTimeout);
+    
+    sectionGlow.classList.add('active');
+    
+    glowTimeout = setTimeout(() => {
+      sectionGlow.classList.remove('active');
+    }, 280);
+  }
+
+  function updateCounter(index) {
+    if (!currentNumEl) return;
+    currentNumEl.style.transform = "translateY(-3px)";
+    currentNumEl.style.opacity = "0";
+    setTimeout(() => {
+      currentNumEl.textContent = String(index + 1).padStart(2, '0');
+      currentNumEl.style.transform = "translateY(0)";
+      currentNumEl.style.opacity = "1";
+    }, 200);
+  }
+
+  function goToSection(index) {
+    if (index < 0 || index >= sections.length || isAnimating) return;
+    isAnimating = true;
+
+    triggerSectionGlow();
+
+    sections.forEach((sec, i) => {
+      sec.classList.remove('active', 'prev');
+      if (i < index) {
+        sec.classList.add('prev');
+      } else if (i === index) {
+        sec.classList.add('active');
+      }
+    });
+
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    currentIndex = index;
+    updateCounter(currentIndex);
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 800);
+  }
+
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (isAnimating) return;
+
+    if (e.deltaY > 30) {
+      goToSection(currentIndex + 1);
+    } else if (e.deltaY < -30) {
+      goToSection(currentIndex - 1);
+    }
+  }, { passive: false });
+
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchend', (e) => {
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        goToSection(currentIndex + 1);
+      } else {
+        goToSection(currentIndex - 1);
+      }
+    }
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>
