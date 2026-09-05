@@ -366,6 +366,120 @@ body { margin: 0; }
 }
 .ymh-scope .appshell-rail { display: none; }
 
+/* ─── "Your Vessel" summary, restacked for mobile ───
+   The exported design only ever laid this content out as a fixed
+   260-320px desktop sidebar (.appshell-rail, hidden above). On phones
+   there was no equivalent, so it simply never appeared. This block
+   reuses the exact same components/classes, redrawn full-width and
+   without the scroll-driven compact/expand behaviour, and renders
+   inside the normal scrolling main column instead of a separate rail. */
+.ymh-scope .rail-mobile-dup {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ymh-line);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ymh-scope .yacht-hero-card {
+  width: 100%;
+  height: 170px;
+  border-radius: var(--ymh-r-card);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(14, 28, 50, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px 16px;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(14, 28, 50, 0.15) 0%, rgba(10, 24, 46, 0.25) 45%, rgba(9, 21, 38, 0.9) 100%),
+    url('https://www.yachtmastershub.com/assets/vessels/infinity-focus-3x.jpg') center 45% / cover no-repeat,
+    radial-gradient(ellipse at 50% 40%, #223754 0%, #0d1726 100%);
+}
+.ymh-scope .rail-photo-avatar {
+  position: absolute; top: 14px; left: 14px; width: 34px; height: 34px;
+  border-radius: 8px; background: var(--orange); display: grid; place-items: center;
+}
+.ymh-scope .rail-photo-badge {
+  position: absolute; top: 14px; right: 14px; display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: var(--ymh-r-pill); background: rgba(46, 204, 113, 0.28);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: #38ef7d; font-size: 10px; font-weight: 800; letter-spacing: .06em;
+}
+.ymh-scope .rail-photo-hrs {
+  position: absolute; top: 48px; right: 14px; padding: 3px 10px;
+  border-radius: var(--ymh-r-pill); background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  color: #ffffff; font-size: 11px; font-weight: 700;
+}
+.ymh-scope .rail-vessel-name { color: #ffffff; font-weight: 700; font-size: 20px; line-height: 1.1; }
+.ymh-scope .rail-vessel-meta { color: rgba(255, 255, 255, 0.85); font-size: 12px; margin-top: 2px; }
+
+.ymh-scope .oemd-card {
+  background: var(--ymh-panel); border: 1px solid var(--ymh-line);
+  border-radius: var(--ymh-r-card); padding: 14px;
+  box-shadow: var(--ymh-shadow-card); width: 100%;
+}
+.ymh-scope .oemd-warranty-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.ymh-scope .oemd-warranty-title { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ymh-muted); font-weight: 700; }
+.ymh-scope .oemd-warranty-tag { font-size: 10px; font-weight: 800; color: #b45309; background: #fef3c7; padding: 3px 9px; border-radius: var(--ymh-r-pill); }
+.ymh-scope .oemd-warranty-list { display: flex; flex-direction: column; gap: 8px; }
+.ymh-scope .oemd-warranty-row {
+  display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center;
+  padding: 8px 10px; background: var(--ymh-bg); border-radius: 10px;
+}
+.ymh-scope .oemd-w-icon { width: 20px; height: 20px; border-radius: 999px; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #ffffff; background: #16a34a; }
+.ymh-scope .oemd-warranty-row[data-status="warn"] .oemd-w-icon { background: #d97706; }
+.ymh-scope .oemd-w-body { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.ymh-scope .oemd-w-org { font-size: 9.5px; font-weight: 700; color: var(--ymh-muted); text-transform: uppercase; }
+.ymh-scope .oemd-w-item { font-size: 12.5px; font-weight: 600; color: var(--ymh-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ymh-scope .oemd-w-bar { height: 4px; background: #e5e9ef; border-radius: 999px; overflow: hidden; margin-top: 3px; }
+.ymh-scope .oemd-w-fill { height: 100%; background: #16a34a; border-radius: 999px; }
+.ymh-scope .oemd-warranty-row[data-status="warn"] .oemd-w-fill { background: #d97706; }
+.ymh-scope .oemd-w-right { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex-shrink: 0; }
+.ymh-scope .oemd-w-until { font-size: 10px; color: var(--ymh-muted); white-space: nowrap; }
+.ymh-scope .oemd-w-pct { font-size: 10px; font-weight: 700; color: #16a34a; }
+.ymh-scope .oemd-warranty-row[data-status="warn"] .oemd-w-pct { color: #d97706; }
+.ymh-scope .oemd-warranty-foot { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--ymh-line); font-size: 11px; color: var(--ymh-muted); text-align: center; }
+
+.ymh-scope .vessel-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.ymh-scope .vessel-section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: #6a7c93; text-transform: uppercase; }
+.ymh-scope .vessel-due-card { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #f8fafc; border: 1px solid #f1f3f6; margin-bottom: 6px; }
+.ymh-scope .vessel-due-bullet { width: 7px; height: 7px; border-radius: 50%; background: #f5a623; margin-top: 5px; flex-shrink: 0; }
+.ymh-scope .vessel-due-bullet.blue { background: #22B6E6; }
+.ymh-scope .vessel-due-title { font-size: 13px; font-weight: 600; color: #0b1e33; }
+.ymh-scope .vessel-due-sub { font-size: 11px; color: #8c9eb8; }
+
+.ymh-scope .vessel-action-btn {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  padding: 10px 14px; border-radius: 999px; background: #ffffff; border: 1px solid #eef1f5;
+  color: #0b1e33; font-size: 13px; font-weight: 600; cursor: pointer; margin-bottom: 6px;
+}
+.ymh-scope .vessel-action-btn:active { border-color: rgba(245, 166, 35, 0.4); }
+
+.ymh-scope .rail-focus-care {
+  width: 100%;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0e1c32 0%, #1b2b41 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 14px rgba(11, 20, 32, 0.08);
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--ymh-r-card);
+  padding: 14px;
+}
+.ymh-scope .fc-header-row { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; }
+.ymh-scope .fc-text-group { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.ymh-scope .rail-focus-care .tag { font-size: 9.5px; font-weight: 700; color: var(--orange); letter-spacing: .08em; margin-bottom: 3px; }
+.ymh-scope .rail-focus-care .title { font-size: 13.5px; font-weight: 700; color: #ffffff; }
+.ymh-scope .rail-focus-care .body { font-size: 11px; color: var(--ymh-muted-lighter); line-height: 1.4; margin-top: 4px; }
+.ymh-scope .rail-focus-care .cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: var(--orange); color: var(--ymh-ink-2); font-weight: 700; border: 0;
+  cursor: pointer; flex-shrink: 0; padding: 8px 14px; font-size: 11.5px; border-radius: var(--ymh-r-pill);
+}
+
 /* Desktop */
 @media (min-width: 1024px) {
   .ymh-scope {
@@ -391,6 +505,7 @@ body { margin: 0; }
   .ymh-scope .oemd-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .ymh-scope .mobile-bottom-dock { position: sticky; bottom: 0; margin-top: auto; padding: 16px 0 8px; background: linear-gradient(180deg, rgba(248,250,252,0) 0%, rgba(248,250,252,0.96) 20%, #f8fafc 100%); }
   .ymh-scope .chat-disclaimer { display: block; }
+  .ymh-scope .rail-mobile-dup { display: none; }
 
   /* 3ra Columna (Rail): Layout de 3 niveles con foto fija arriba, contenido central scrolleable y Focus Care abajo */
   .ymh-scope .appshell-rail {
@@ -868,6 +983,140 @@ body { margin: 0; }
 
       <div class="chat-disclaimer">
         VesselIQ is an AI and can make mistakes. Check anything safety critical against the manual or a qualified marine engineer. <a href="#">How it works</a>
+      </div>
+    </div>
+
+    <!-- "Your Vessel" — mobile-only restacked copy of the desktop rail (aside.appshell-rail below), so this content isn't desktop-exclusive -->
+    <div class="rail-mobile-dup">
+      <div class="vessel-section-header"><span class="vessel-section-title">Your Vessel</span></div>
+
+      <div class="yacht-hero-card">
+        <div class="rail-photo-avatar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2"><path d="M2 20a2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1"/><path d="M4 18 3 9l4-2 5 8"/><path d="M14 15l7-3-2 6"/></svg>
+        </div>
+        <div class="rail-photo-badge">
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg>
+          FACTORY VERIFIED
+        </div>
+        <div class="rail-photo-hrs">40 hrs</div>
+        <div>
+          <div class="rail-vessel-name">Infinity</div>
+          <div class="rail-vessel-meta">Focus 3X · 2024 · Miami</div>
+        </div>
+      </div>
+
+      <div class="oemd-card">
+        <div class="oemd-warranty-head">
+          <div class="oemd-warranty-title">Warranty Tracker</div>
+          <div class="oemd-warranty-tag">3 ACTIVE · 1 SOON</div>
+        </div>
+        <div class="oemd-warranty-list">
+          <div class="oemd-warranty-row" data-status="active">
+            <div class="oemd-w-icon"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="oemd-w-body">
+              <div class="oemd-w-org">FOCUS</div>
+              <div class="oemd-w-item">Hull · 2 yr</div>
+              <div class="oemd-w-bar"><div class="oemd-w-fill" style="width: 68%"></div></div>
+            </div>
+            <div class="oemd-w-right">
+              <div class="oemd-w-until">expires 2027-04</div>
+              <div class="oemd-w-pct">68% used</div>
+            </div>
+          </div>
+          <div class="oemd-warranty-row" data-status="active">
+            <div class="oemd-w-icon"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="oemd-w-body">
+              <div class="oemd-w-org">YANMAR</div>
+              <div class="oemd-w-item">8LV370Z engines · 2 yr</div>
+              <div class="oemd-w-bar"><div class="oemd-w-fill" style="width: 68%"></div></div>
+            </div>
+            <div class="oemd-w-right">
+              <div class="oemd-w-until">expires 2027-04</div>
+              <div class="oemd-w-pct">68% used</div>
+            </div>
+          </div>
+          <div class="oemd-warranty-row" data-status="active">
+            <div class="oemd-w-icon"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div class="oemd-w-body">
+              <div class="oemd-w-org">DOMETIC</div>
+              <div class="oemd-w-item">GTX16 AC · 2 yr</div>
+              <div class="oemd-w-bar"><div class="oemd-w-fill" style="width: 68%"></div></div>
+            </div>
+            <div class="oemd-w-right">
+              <div class="oemd-w-until">expires 2027-04</div>
+              <div class="oemd-w-pct">68% used</div>
+            </div>
+          </div>
+          <div class="oemd-warranty-row" data-status="warn">
+            <div class="oemd-w-icon"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 9v4M12 17h.01"/></svg></div>
+            <div class="oemd-w-body">
+              <div class="oemd-w-org">GARMIN</div>
+              <div class="oemd-w-item">Electronics · 2 yr</div>
+              <div class="oemd-w-bar"><div class="oemd-w-fill" style="width: 77%"></div></div>
+            </div>
+            <div class="oemd-w-right">
+              <div class="oemd-w-until">expires 2027-02</div>
+              <div class="oemd-w-pct">77% used</div>
+            </div>
+          </div>
+        </div>
+        <div class="oemd-warranty-foot">File a claim in one tap · included with your yacht</div>
+      </div>
+
+      <div>
+        <div class="vessel-section-header">
+          <span class="vessel-section-title">NEXT 3 DUE</span>
+        </div>
+        <div class="vessel-due-card">
+          <div class="vessel-due-bullet"></div>
+          <div>
+            <div class="vessel-due-title">50-hour break-in service</div>
+            <div class="vessel-due-sub">in 3 weeks · Yanmar 8LV</div>
+          </div>
+        </div>
+        <div class="vessel-due-card">
+          <div class="vessel-due-bullet"></div>
+          <div>
+            <div class="vessel-due-title">First annual · Yacht Creators</div>
+            <div class="vessel-due-sub">in 3 months · pre-scheduled</div>
+          </div>
+        </div>
+        <div class="vessel-due-card">
+          <div class="vessel-due-bullet blue"></div>
+          <div>
+            <div class="vessel-due-title">Seakeeper equivalent audit</div>
+            <div class="vessel-due-sub">in 4 months · gyro balance check</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="vessel-section-header">
+          <span class="vessel-section-title">QUICK ACTIONS</span>
+        </div>
+        <button type="button" class="vessel-action-btn">
+          <span>Run pre-trip</span>
+          <span style="color:#8c9eb8;">→</span>
+        </button>
+        <button type="button" class="vessel-action-btn">
+          <span>Log a service</span>
+          <span style="color:#8c9eb8;">→</span>
+        </button>
+        <button type="button" class="vessel-action-btn">
+          <span>Book at Yacht Creators</span>
+          <span style="color:#8c9eb8;">→</span>
+        </button>
+      </div>
+
+      <div class="rail-focus-care">
+        <div class="fc-header-row">
+          <div class="fc-text-group">
+            <span class="tag">FOCUS CARE</span>
+            <span class="title">Talk to a Focus expert</span>
+            <p class="body">24/7 factory-trained support. Included with your yacht.</p>
+          </div>
+          <button type="button" class="cta">Call now →</button>
+        </div>
       </div>
     </div>
   </main>
