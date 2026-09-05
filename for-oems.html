@@ -719,9 +719,9 @@ img { max-width: 100%; display: block; }
         <h1 class="oem-h1">Owner support, on tap.<br />Factory-authorized. In 30 days.</h1>
         <p class="oem-sub">A branded AI engineer that knows every model you build, quotes your service intervals, and answers your owners' questions with the depth of a chief engineer, all day, every day. Deployed on your domain. Trained on your data.</p>
         
-        <button class="hero-btn" id="startTrialBtn">
-          Start Free Trial <span aria-hidden="true">&rarr;</span>
-        </button>
+        <a class="hero-btn" id="startTrialBtn" href="/engineer">
+          Start Live Demo <span aria-hidden="true">&rarr;</span>
+        </a>
 
         <div class="hero-interactive-flow" id="heroInteractiveFlow">
           <form class="hero-ask" id="heroAskForm" role="search" aria-label="Ask the engineer" onsubmit="event.preventDefault();">
@@ -926,8 +926,6 @@ img { max-width: 100%; display: block; }
     totalNumEl.textContent = String(sections.length).padStart(2, '0');
   }
 
-  const startTrialBtn = document.getElementById("startTrialBtn");
-  const heroInteractiveFlow = document.getElementById("heroInteractiveFlow");
   const heroAskInput = document.getElementById("heroAskInput");
   const video = document.getElementById("heroVideo");
 
@@ -944,16 +942,6 @@ img { max-width: 100%; display: block; }
       heroAskInput.focus();
     });
   });
-
-  if (startTrialBtn) {
-    startTrialBtn.addEventListener("click", () => {
-      startTrialBtn.classList.add("is-hidden");
-      if (heroInteractiveFlow) heroInteractiveFlow.classList.add("is-visible");
-      setTimeout(() => {
-        if (heroAskInput) heroAskInput.focus();
-      }, 300);
-    });
-  }
 
   let currentIndex = 0;
   let isAnimating = false;
